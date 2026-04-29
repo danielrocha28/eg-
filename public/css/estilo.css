@@ -1,13 +1,26 @@
-@import url('https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Instrument+Sans:wght@300;400;500&display=swap');
 
 body {
   margin: 0;
   padding: 0;
-  font-family: 'Barlow', 'Segoe UI', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  background-color: black;
+  color: var(--carvao);
+  font-weight: 300;
+  font-family: 'Instrument Sans', sans-serif;
+  background-color: var(--creme);
+  overflow-x: hidden;
+  scroll-behavior: smooth;
+  box-sizing: border-box;
 }
 
 :root {
+  --creme: #F5F0E8;
+  --carvao: #1A1A18;
+  --oliva: #5C6B3A;
+  --oliva-claro: #7A8C50;
+  --oliva-suave: #8E9B6E;
+  --ferrugem: #B5541A;
+  --cinza-quente: #E8E3D8;
+  --texto-suave: #6B6660;
   --tamanho-header: 80px;
   --tamanho-banner: calc(100vh - var(--tamanho-header) - var(--tamanho-footer) - 2px);
   --tamanho-simulador: calc(100vh - var(--tamanho-header) - var(--tamanho-footer) - 2px);
@@ -15,77 +28,108 @@ body {
   --tamanho-footer: 65px;
 }
 
-.container {
-  display: flex;
-  width: 80%;
-  margin: auto;
-}
-
+/* HEADER / NAV */
 .header {
   height: var(--tamanho-header);
-  border-bottom: 2px solid #32b9cd;
-}
-
-.header .container {
-  justify-content: space-between;
-  align-items: center;
-  height: 100%;
-}
-
-.header a {
-  text-decoration: none;
-  color: #e3b062;
-}
-
-.agora {
-  font-weight: 800;
-}
-
-.navbar {
-  width: 300px;
+  border-bottom: 2px solid var(--oliva-suave);
   display: flex;
   align-items: center;
   justify-content: space-between;
-  list-style: none;
-  color: #e3b062;
+  padding: 0 10%;     
 }
 
-.titulo {
-  color: #32b9cd;
-  width: fit-content;
-  font-weight: 500;
+.nav-logo {
+  font-size: 24px;
+  font-weight: 700;
+  text-decoration: none;
+  color: var(--carvao);
 }
 
-.header h1 {
+.nav-links {
+  display: flex;
+  gap: 32px;              
+  list-style: none;        
   margin: 0;
+  padding: 0;
+}
+
+.nav-links a {
+  text-decoration: none;
+  color: var(--carvao);
+  font-size: 14px;
+  letter-spacing: 0.05em;
+  transition: color 0.2s;  
+}
+
+.nav-links a:hover {
+  color: var(--oliva);     
+}
+
+.nav-cta {
+  text-decoration: none;
+  color: var(--carvao);
+  font-size: 14px;
+  font-weight: 500;
+  border: 1px solid var(--carvao);
+  padding: 8px 16px;
+  border-radius: 4px;
+  transition: all 0.2s;
+}
+
+.nav-cta:hover {
+  background-color: var(--carvao);
+  color: var(--creme);
 }
 
 /* BANNER */
 
 .banner {
-  height: var(--tamanho-banner);
-  color: white;
-  background-image: url('../assets/imgs/bg-jelly-fish-para-home.png');
+  height: auto;
+  padding: 20px 0; 
+  color: black;
   background-size: cover;
 }
 
 .banner .container {
+  display: flex;
   justify-content: center;
   align-items: center;
   height: 100%;
+  font-family: 'Cormorant Garamond', serif;
 }
 
-.banner .container p {
-  width: 50%;
-  margin: 0;
-  padding: 0;
-  font-size: 36px;
+.banner-frase {
+  text-align: center;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 150px;
+  font-weight: 300;
+  line-height: 1.2;
+  margin: 0 auto;
 }
 
-.banner .container span {
-  font-weight: 800;
+.banner-frase em {
+  color: var(--oliva);
+  font-style: italic;
 }
 
+.banner-subtitulo {
+  text-align: center;
+  font-size: 13px;
+  letter-spacing: 0.15em;
+  color: var(--texto-suave);
+  text-transform: uppercase;
+  margin: 24px 0 8px;
+}
+
+.banner-descricao {
+  text-align: center;
+  padding: 24px 10%;
+  color: var(--texto-suave);
+  font-size: 16px;
+  line-height: 1.7;
+  max-width: 600px;
+  margin: 0 auto;
+}
 /* MISSÃO VISÃO VALORES */
 
 .social {
@@ -237,7 +281,7 @@ body {
 
 /* FORMULARIO */
 
-.alerta_erro{
+.alerta_erro {
   display: flex;
   justify-content: flex-end;
 }
@@ -254,7 +298,7 @@ body {
   margin-right: 10%;
 }
 
-.card_erro #mensagem_erro{
+.card_erro #mensagem_erro {
   font-weight: 500;
   font-size: 20px;
 }
@@ -354,9 +398,23 @@ input {
 }
 
 @keyframes bell {
-  0%   {transform: rotate(25deg)}
-  25%  {transform: rotate(-25deg)}
-  50%  {transform: rotate(25deg)}
-  75%  {transform: rotate(-25deg)}
-  100% {transform: rotate(25deg)}
+  0% {
+    transform: rotate(25deg)
+  }
+
+  25% {
+    transform: rotate(-25deg)
+  }
+
+  50% {
+    transform: rotate(25deg)
+  }
+
+  75% {
+    transform: rotate(-25deg)
+  }
+
+  100% {
+    transform: rotate(25deg)
+  }
 }
