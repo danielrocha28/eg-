@@ -16,15 +16,29 @@
 </head>
 
 <body>
-    <div class="login-buttons">
-        <div class="voltar">
-            <a href="index.html"><span>VOLTAR</span></a>
-        </div>
-
-        <div class="cadastro">
-           <a href="cadastro.html"> <span>CRIAR CONTA</span></a>
-        </div>
+<div class="login-buttons">
+    <div class="voltar">
+        <a href="index.html">
+            <svg fill="currentColor" height="22" viewBox="0 0 22 22" width="22" xmlns="http://www.w3.org/2000/svg">
+                <rect class="seta-traco" height="2" width="0" x="7" y="10"></rect>
+                <path d="M15.75 4H13L6 11L13 18H15.75L8.75 11L15.75 4Z"></path>
+            </svg>
+            <span>VOLTAR</span>
+        </a>
     </div>
+
+    <div class="cadastro">
+        <a href="cadastro.html">
+            <span class="cadastro-inner">
+                <span class="cadastro-texto">CRIAR CONTA</span>
+                <span class="cadastro-linha-wrapper">
+                    <div class="cadastro-linha"></div>
+                </span>
+            </span>
+        </a>
+    </div>
+</div>
+
     <div class="login">
 
         <div class="alerta_erro">
@@ -33,11 +47,13 @@
             </div>
         </div>
         <div class="container">
-            <div class="img">
-                <img src="./assets/imgs/logo-lado.png" alt="">
+            <div class="login-logo">
+                <img src="./assets/imgs/logo.png" alt="">
             </div>
             <div class="card card-login">
-                <h2>Fazer login em Egó</h2>
+                <div class="login-frase">
+                    <h2>Fazer login em Egó</h2>
+                </div>
                 <div class="formulario">
                     <div class="campo">
                         <span>E-mail:</span>
@@ -47,7 +63,7 @@
                         <span>Senha:</span>
                         <input id="senha_input" type="password" placeholder="Senha">
                     </div>
-                    <button class="botao" onclick="entrar()">Entrar</button>
+                    <button class="botao" onclick="entrar()">FAZER LOGIN</button>
                 </div>
 
                 <div id="div_aguardar" class="loading-div">
