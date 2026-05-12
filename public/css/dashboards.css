@@ -120,7 +120,7 @@ body {
   position: relative;
   top: 0;
   left: 20%;
-  background-color: #161618;
+  background-color: #faf9f4;
   height: 100vh;
   overflow: auto;
 }
@@ -195,6 +195,20 @@ body {
   align-items: center;
   color: white;
 }
+.card-logo {
+   width: 100%;
+   display: flex;
+   justify-content: center;
+   margin-bottom: 10px;
+   margin-left: -20px;
+}
+
+.card-logo img {
+  height: 50%;
+  width: 50%;
+  
+}
+
 
 .card-aquario {
   margin: 2%;
@@ -349,7 +363,7 @@ canvas {
   justify-content: space-evenly;
   align-items: center;
   border-right: 3px solid #32b9cd;
-  background-color: #212124;
+  background-color: #201e21;
 }
 
 .dash-right {
@@ -375,7 +389,7 @@ canvas {
 }
 
 .hello h3 {
-  color: #e3b062;
+  color: white;
   font-weight: 300;
   font-size: 1.2rem;
 }
@@ -384,45 +398,38 @@ canvas {
   font-weight: 800;
 }
 
+.btn-nav, .btn-nav-white, .btn-logout {
+  cursor: pointer;
+  border-radius: 6px;
+  font-weight: 600;
+  font-size: 14px;
+  text-align: center;
+  padding: 10px 0;
+  transition: transform 50ms, background-color 0.15s;
+}
+
 .btn-nav {
   width: 40%;
-  color: white;
   background-color: #e6005a;
-  border-radius: 5px;
-  text-align: center;
-  padding: 2% 5%;
+  color: white;
+  border: 2px solid #e6005a;
 }
 
 .btn-nav-white {
   width: 40%;
-  background-color: white;
-  border: 3px solid #e6005a;
-  border-radius: 5px;
-  text-align: center;
-  padding: 2% 5%;
-}
-
-.btn-nav-white h3 {
+  background-color: transparent;
   color: #e6005a;
-  padding: 0;
-  margin: 0;
-}
-
-.btn-nav h3,
-.btn-logout h3 {
-  margin: 0;
-  padding: 0;
+  border: 2px solid #e6005a;
 }
 
 .btn-logout {
-  margin: 0;
-  padding: 0;
   width: 20%;
   background-color: #32b9cd;
   color: white;
-  border-radius: 10px;
-  text-align: center;
-  padding: 10px 15px;
+  border: 2px solid #32b9cd;
   margin-bottom: 100px;
-  cursor: pointer;
+}
+.btn-nav h3, .btn-nav-white h3, .btn-logout h3 {
+  margin: 0;
+  padding: 0;
 }

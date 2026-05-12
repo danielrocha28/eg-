@@ -283,68 +283,171 @@ body {
 }
 
 .transcendence {
+  background-color: #000;
   width: 100%;
   height: 80vh;
   background-image: url(../assets/imgs/mais1f.png);
   background-size: cover;
   background-position: center;
-  background-repeat: no-repeat;
   display: flex;
-  align-items: center;
+  align-items: center; 
   justify-content: center;
   position: relative;
-}
-
-.transcendence::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: rgba(26, 26, 24, 0.65);
-  z-index: 1;
+  overflow: hidden;
 }
 
 .container-transcendence {
-  max-width: 1200px;
+  max-width: 1000px; 
+  width: 95%;
   margin: 0 auto;
-  width: 90%;
   position: relative;
-  z-index: 2;
+  height: 100%; 
+  display: flex;
+  align-items: center; 
 }
 
 .container-transcendence h1 {
+  position: absolute;
+  top: 50px;
+  left: 0;
+  right: 0;
   font-family: 'Caslon Ionic', serif;
   font-size: 48px;
-  font-weight: 1600;
+  font-weight: 1400;
   color: white;
   text-align: center;
-  margin: 0 0 50px 0;
+  margin: 0;
   line-height: 1.3;
 }
 
 .transcendence-content {
   display: flex;
-  gap: 50px;
+  width: 100%;
+  justify-content: space-between; 
   align-items: center;
-  justify-content: center;
+  gap: 20px;
 }
 
 .transcendence-block {
-  flex: 1;
-  max-width: 450px;
+  max-width: 350px;
 }
 
 .transcendence-block p {
   font-family: 'Caslon Ionic', serif;
-  font-size: 15px;
+  font-size: 19px;
   color: white;
-  line-height: 1.85;
+  line-height: 1.8;
   margin: 0;
   text-align: justify;
-  letter-spacing: 0.2px;
 }
+
+/* QUIZ */
+
+.quiz {
+  background-color: var(--creme);
+  padding: 60px 5%;
+  display: flex;
+  align-items: center;
+  gap: 60px;
+}
+
+.quiz-houses {
+  display: flex;
+  flex-wrap: wrap; 
+  justify-content: center; 
+  gap: 50px 25px; 
+  position: relative;
+  padding-top: 60px;
+  max-width: 750px;
+}
+
+.quiz-badge {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  border: 1px solid black;
+  color: black;
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 2px;
+  padding: 4px 14px;
+  border-radius: 20px;
+  white-space: nowrap;
+}
+
+.house-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  width: calc(33.33% - 20px); 
+  min-width: 80px;
+}
+
+.house-banner {
+  width: 80px;
+  height: 105px;
+  border-radius: 4px 4px 0 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 32px;
+  color: white;
+}
+
+.house-name {
+  font-size: 15px;
+  font-weight: 500;
+  color: black;
+  text-align: center;
+}
+
+.house-pct {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 32px;
+  font-weight: 300;
+  color: black;
+}
+
+.quiz-cta {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.quiz-cta h1 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 38px;
+  font-weight: 300;
+  color: black;
+  line-height: 1.3;
+  margin: 0;
+}
+
+.btn-quiz {
+  cursor: pointer;
+  width: fit-content;
+  padding: 12px 28px;
+  background-color: var(--carvao);
+  color: white;
+  border: none;
+  border-radius: 4px;
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  position: relative;
+  overflow: hidden;
+  transition: background 0.2s, transform 50ms;
+}
+
+.btn-quiz:hover {
+   background-color: #2b2b2b;
+  color: var(--creme);
+}
+
 
 /* FOOTER */
 
