@@ -77,6 +77,14 @@
                             <input type="radio" id="quartaOpcao" name="option" value="alternativaD" />
                             <label for="quartaOpcao" id="labelOpcaoQuatro"></label>
                         </span>
+                        <span>
+                            <input type="radio" id="quintaOpcao" name="option" value="alternativaE" />
+                            <label for="quintaOpcao" id="labelOpcaoCinco"></label>
+                        </span>
+                        <span>
+                            <input type="radio" id="sextaOpcao" name="option" value="alternativaF" />
+                            <label for="sextaOpcao" id="labelOpcaoSeis"></label>
+                        </span>
                     </div>
 
                     <div id="botoes">
@@ -102,6 +110,89 @@
     let listaDeQuestoes = [];
     let numeroDaQuestaoAtual = 0;
     let quantidadeDeQuestoes = 0;
+
+    const alternativasPorQuestao = {
+        1: [
+            "Aceitar o sem-sentido da vida e viver com rebeldia e paixão apesar dele.",
+            "Uma responsabilidade total e inevitável; estamos condenados a escolher a cada instante.",
+            "Um salto no escuro; uma escolha profunda diante do mistério que exige coragem e fé.",
+            "Uma ilusão completa, já que nada importa e não há propósito real no universo.",
+            "A capacidade de agir no mundo assumindo um compromisso ético e solidário com os outros.",
+            "A abertura da nossa consciência para perceber o mundo livre de preconceitos, vivendo o presente."
+        ],
+        2: [
+            "Um confronto constante entre nosso desejo de sentido e o silêncio indiferente do universo.",
+            "Um projeto em aberto que definimos passo a passo através de nossas escolhas.",
+            "Uma jornada repleta de paradoxos, angústias e a busca por uma verdade interior profunda.",
+            "Um piscar de olhos biológico sem qualquer valor, significado ou destino final.",
+            "Uma construção humana coletiva que ganha valor real quando nos importamos com o próximo.",
+            "Um fluxo contínuo de experiências, sensações e percepções através do nosso corpo no mundo."
+        ],
+        3: [
+            "Escolhe de forma autônoma e encara a situação com ironia, sem esperar respostas do universo.",
+            "Decide sabendo que a responsabilidade é 100% minha e que não posso dar desculpas pelas consequências.",
+            "Olha para dentro de si, abraça a incerteza e dá um salto de fé naquilo que sua intuição dita.",
+            "Escolhe qualquer caminho ou deixa o acaso decidir, pois no fim das contas o resultado dá na mesma.",
+            "Pensa em como essa decisão impacta as pessoas ao meu redor e a sociedade em que vivo.",
+            "Observa como essa situação se manifesta na minha mente e sinto a experiência presente antes de agir."
+        ],
+        4: [
+            "Companheiros de viagem que compartilham a mesma estranheza e o mesmo tédio de existir.",
+            "Aqueles que testam minha autenticidade e me lembram que sou livre para me definir.",
+            "Indivíduos únicos que também enfrentam o dilema solitário da própria alma perante o absoluto.",
+            "Distrações passageiras ou estruturas sociais vazias que tentam ditar regras irrelevantes.",
+            "O espelho da minha própria humanidade; existo para e com os outros em busca de um mundo melhor.",
+            "Seres com quem divido o espaço e o tempo, percebidos através da minha vivência e empatia imediata."
+        ],
+        5: [
+            "Aceitar o absurdo da vida e viver intensamente, esgotando todas as possibilidades com rebeldia.",
+            "Inventar nosso próprio sentido com total autonomia, assumindo a autoria de nossa história.",
+            "Buscar um significado transcendental e subjetivo que vá além da lógica fria do mundo.",
+            "Aceitar o vazio absoluto e parar de tentar criar propósitos artificiais para nos enganar.",
+            "Dedicar nossa existência a construir um sentido coletivo baseado na dignidade e no bem comum.",
+            "Focar em descrever e vivenciar o mundo exatamente como ele se apresenta à nossa percepção."
+        ],
+        6: [
+            "A minha persistência em continuar vivendo e criando mesmo sabendo do caos do mundo.",
+            "A soma das minhas escolhas e atos práticos. Eu sou o que eu faço.",
+            "A minha relação íntima e sincera com minhas crenças mais profundas e minhas crises internas.",
+            "Nada. A identidade é apenas uma ilusão linguística e social; não somos nada fixo.",
+            "A minha postura ética e a maneira como contribuo para a emancipação da humanidade.",
+            "A forma como minha consciência habita meu corpo e percebe o tempo, o espaço e as sensações."
+        ],
+        7: [
+            "Encaro como parte do jogo, enfrentando-o sem choramingar ou criar falsas esperanças.",
+            "Assumo o sofrimento como consequência direta das minhas escolhas ou da própria condição livre.",
+            "Enxergo o sofrimento como um momento crucial que purifica a alma e nos aproxima do essencial.",
+            "Vejo como um fato biológico inevitável e desprovido de qualquer propósito oculto ou lição.",
+            "Tento transformá-lo em empatia para lutar contra as injustiças que causam dor ao meu semelhante.",
+            "Procuro acolher a dor na minha consciência, observando como ela afeta minha percepção do momento."
+        ],
+        8: [
+            "É o fim trágico que torna a vida uma piada, mas que me dá o direito de viver sem amarras.",
+            "É o limite final que me lembra que o tempo está correndo e preciso escolher com urgência agora.",
+            "O mistério final que desafia a razão e nos força a refletir sobre o valor eterno da nossa alma.",
+            "O apagão definitivo que prova que nenhuma ambição, glória ou dor humana importou de verdade.",
+            "O encerramento do meu ciclo, deixando meu legado nas memórias e vidas das pessoas que ajudei.",
+            "O momento em que minha percepção do mundo cessa; até lá, foco em vivenciar o presente ao máximo."
+        ],
+        9: [
+            "Uma busca inútil por respostas onde só há silêncio, então a única verdade é aceitar o caos.",
+            "Algo que eu mesmo defino e valido através do meu compromisso com a minha própria coerência.",
+            "Algo subjetivo e paradoxal, que só pode ser sentido e vivido na intimidade da alma.",
+            "Uma mentira reconfortante que a humanidade inventou para não pirar diante do vazio.",
+            "Um valor ético focado na emancipação humana e na justiça social para todos.",
+            "A experiência direta de como as coisas se mostram para mim no aqui e no agora.",
+        ],
+        10: [
+            "O mundo é absurdo, mas continuo empurrando minha pedra com um sorriso no rosto.",
+            "Não há desculpas: eu sou inteiramente responsável pelo que escolho ser.",
+            "Na angústia da dúvida, a única saída que resta é o salto corajoso da fé.",
+            "Nada tem valor real, as regras são inventadas e o vazio é o nosso único destino.",
+            "O ser humano é o futuro do próprio ser humano; existo para e pelo outro.",
+            "A realidade é aquilo que sinto, percebo e vivo no exato momento presente."
+        ]
+    };
 
     async function iniciarQuiz() {
 
@@ -157,14 +248,15 @@
         // ===== ENUNCIADO VINDO DO BANCO =====
         document.getElementById("spanQuestaoExibida").innerHTML = q.enunciado;
 
-        // ===== ALTERNATIVAS FIXAS =====
-        document.getElementById("labelOpcaoUm").innerHTML = "Alternativa A";
+        // ===== ALTERNATIVAS FIXAS POR ID =====
+        const alts = alternativasPorQuestao[q.id];
 
-        document.getElementById("labelOpcaoDois").innerHTML = "Alternativa B";
-
-        document.getElementById("labelOpcaoTres").innerHTML = "Alternativa C";
-
-        document.getElementById("labelOpcaoQuatro").innerHTML = "Alternativa D";
+        document.getElementById("labelOpcaoUm").innerHTML    = alts[0];
+        document.getElementById("labelOpcaoDois").innerHTML  = alts[1];
+        document.getElementById("labelOpcaoTres").innerHTML  = alts[2];
+        document.getElementById("labelOpcaoQuatro").innerHTML = alts[3];
+        document.getElementById("labelOpcaoCinco").innerHTML = alts[4];
+        document.getElementById("labelOpcaoSeis").innerHTML  = alts[5];
     }
 
     async function submeter() {
@@ -237,7 +329,10 @@
             'primeiraOpcao',
             'segundaOpcao',
             'terceiraOpcao',
-            'quartaOpcao'
+            'quartaOpcao',
+            'quintaOpcao',
+            'sextaOpcao'
+
         ].forEach(id => {
 
             document.getElementById(id).disabled = !enable;
@@ -299,5 +394,4 @@
     }
 
 </script>
-
 </html>
