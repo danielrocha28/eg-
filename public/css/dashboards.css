@@ -19,19 +19,11 @@
   --new-white: #E8E8E8;
 }
 
-/* ── Base ──────────────────────────────────────────────────────────────────── */
 
-body {
-  margin: 0;
-  padding: 0;
-  color: var(--new-black);
-  background-color: var(--new-white);
-  font-family: 'Barlow', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-}
 
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap');
 
-/* ── Variáveis Modernas ────────────────────────────────────────────────────── */
+/* ── Variáveis Modernas*/
 
 :root {
   --primary-brand: #ED145B;
@@ -45,7 +37,7 @@ body {
   --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-/* ── Base Reset ───────────────────────────────────────────────────────────── */
+/* ── Base Reset*/
 
 body {
   margin: 0;
@@ -57,7 +49,7 @@ body {
   box-sizing: border-box;
 }
 
-/* ── Container do Quiz ────────────────────────────────────────────────────── */
+/* ── Container do Quiz*/
 
 #pontuacaoEJogo {
   display: flex;
@@ -67,7 +59,7 @@ body {
   padding: 40px 20px;
 }
 
-/* ── Botão Iniciar (Estilo Apple) ─────────────────────────────────────────── */
+/* ── Botão Iniciar  */
 
 #btnIniciarQuiz {
   background-color: var(--text-main);
@@ -96,7 +88,7 @@ max-width: 450px;
 margin: 0 auto;
 }
 
-/* ── Cards (Jogo e Pontuação) ────────────────────────────────────────────── */
+/* ── Cards (Jogo e Pontuação) */
 
 #jogo, #pontuacao {
   background: var(--card-bg);
@@ -109,7 +101,7 @@ margin: 0 auto;
   transition: var(--transition);
 }
 
-/* ── Tipografia e Questões ───────────────────────────────────────────────── */
+/* ── Tipografia e Questões  */
 
 #infoQuestao span {
   color: var(--text-secondary);
@@ -127,7 +119,7 @@ margin: 0 auto;
   margin: 12px 0 34px 0;
 }
 
-/* ── Alternativas (Custom Radio) ──────────────────────────────────────────── */
+/* ── Alternativas */
 
 #opcoes span {
   display: block;
@@ -171,7 +163,7 @@ margin: 0 auto;
   color: #c62828 !important;
 }
 
-/* ── Botões de Ação ───────────────────────────────────────────────────────── */
+/* ── Botões de Ação */
 
 #botoes {
   display: flex;
@@ -209,7 +201,7 @@ margin: 0 auto;
   background-color: #e8e8ed;
 }
 
-/* ── Pontuação Final ─────────────────────────────────────────────────────── */
+/* ── Pontuação Final */
 
 #pontuacaoFinalJogo {
   text-align: center;
@@ -229,7 +221,7 @@ margin: 0 auto;
   line-height: 1.5;
 }
 
-/* ── Utilitários ───────────────────────────────────────────────────────────── */
+/* ── Utilitários───── */
 
 .flex-colunar        { display: flex; flex-direction: column; }
 .width-fit-content   { width: fit-content; }
@@ -246,7 +238,7 @@ margin: 0 auto;
 .text-danger-with-bg  { color: var(--danger-dark);   background-color: var(--danger-light); }
 .text-new-gray        { color: var(--new-gray); }
 
-/* ── Layout principal ──────────────────────────────────────────────────────── */
+/* ── Layout principal */
 
 .janela {
   display: flex;

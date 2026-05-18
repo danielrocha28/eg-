@@ -14,11 +14,11 @@
     <script src="../js/sessao.js"></script>
     <script src="../js/alerta.js"></script>
     <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css2?family=Exo+2:ital,wght@0,100..0,900;1,100..1,900&display=swap"
+    <link href="https://fonts.googleapis.com/css2?family=Exo+2:ital,wght@0,100..900;1,100..900&display=swap"
         rel="stylesheet">
 </head>
 
-<body onload="validarSessao(), exibirAquarios(), atualizacaoPeriodica(), onloadEsconder()">
+<body onload="validarSessao(), atualizacaoPeriodica(), onloadEsconder()">
 
     <div class="janela">
 
@@ -47,197 +47,257 @@
 
         <div class="dash">
 
-  <div id="pontuacaoEJogo" class="quiz">
-    <button id="btnIniciarQuiz" onclick="iniciarQuiz()">INICIAR QUIZ</button>
+            <div id="pontuacaoEJogo" class="quiz">
+                <button id="btnIniciarQuiz" onclick="iniciarQuiz()">INICIAR QUIZ</button>
 
-    <!-- O Jogo -->
-    <div id="jogo" style="display: none;">
-        <div id="infoQuestao">
-            <span>Questão <span id="spanNumeroDaQuestaoAtual"></span> de <span id="qtdQuestoes"></span></span>
+                <!-- O Jogo -->
+                <div id="jogo" style="display: none;">
+                    <div id="infoQuestao">
+                        <span>Questão <span id="spanNumeroDaQuestaoAtual"></span> de <span id="qtdQuestoes"></span></span>
+                    </div>
+
+                    <div id="perguntaDaQuestaoAtual">
+                        <span id="spanQuestaoExibida"></span>
+                    </div>
+
+                    <div id="opcoes">
+                        <span>
+                            <input type="radio" id="primeiraOpcao" name="option" value="alternativaA" />
+                            <label for="primeiraOpcao" id="labelOpcaoUm"></label>
+                        </span>
+                        <span>
+                            <input type="radio" id="segundaOpcao" name="option" value="alternativaB" />
+                            <label for="segundaOpcao" id="labelOpcaoDois"></label>
+                        </span>
+                        <span>
+                            <input type="radio" id="terceiraOpcao" name="option" value="alternativaC" />
+                            <label for="terceiraOpcao" id="labelOpcaoTres"></label>
+                        </span>
+                        <span>
+                            <input type="radio" id="quartaOpcao" name="option" value="alternativaD" />
+                            <label for="quartaOpcao" id="labelOpcaoQuatro"></label>
+                        </span>
+                    </div>
+
+                    <div id="botoes">
+                        <button onclick="submeter()" id="btnSubmeter">Submeter resposta</button>
+                        <button onclick="avancar()" id="btnProx" disabled>Próxima questão</button>
+
+                        <!-- Mensagem Final aparecerá aqui dentro quando o jogo acabar -->
+                        <div id="msgFinal" style="display: none; margin-top: 20px; padding: 15px; border-radius: 12px; text-align: center;"></div>
+
+                        <button onclick="tentarNovamente()" id="btnTentarNovamente" disabled style="display: none;">Reiniciar Quiz</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="cards" id="cardAquarios"></div>
+
         </div>
-
-        <div id="perguntaDaQuestaoAtual">
-            <span id="spanQuestaoExibida"></span>
-        </div>
-
-        <div id="opcoes">
-            <span>
-                <input type="radio" id="primeiraOpcao" name="option" value="alternativaA" />
-                <label for="primeiraOpcao" id="labelOpcaoUm"></label>
-            </span>
-            <span>
-                <input type="radio" id="segundaOpcao" name="option" value="alternativaB" />
-                <label for="segundaOpcao" id="labelOpcaoDois"></label>
-            </span>
-            <span>
-                <input type="radio" id="terceiraOpcao" name="option" value="alternativaC" />
-                <label for="terceiraOpcao" id="labelOpcaoTres"></label>
-            </span>
-            <span>
-                <input type="radio" id="quartaOpcao" name="option" value="alternativaD" />
-                <label for="quartaOpcao" id="labelOpcaoQuatro"></label>
-            </span>
-        </div>
-
-        <div id="botoes">
-            <button onclick="submeter()" id="btnSubmeter">Submeter resposta</button>
-            <button onclick="avancar()" id="btnProx" disabled>Próxima questão</button>
-            
-            <!-- Mensagem Final aparecerá aqui dentro quando o jogo acabar -->
-            <div id="msgFinal" style="display: none; margin-top: 20px; padding: 15px; border-radius: 12px; text-align: center;"></div>
-            
-            <button onclick="tentarNovamente()" id="btnTentarNovamente" disabled style="display: none;">Reiniciar Quiz</button>
-        </div>
-    </div>
-</div>
-
-        <div class="cards" id="cardAquarios"></div>
-
-    </div>
     </div>
 
 </body>
-
 <script>
-    function exibirAquarios() {
-        JSON.parse(sessionStorage.AQUARIOS).forEach(item => {
-            document.getElementById("cardAquarios").innerHTML += `
-                <div class="card-aquario">
-                    <div class="title-aquario"><h1>${item.descricao}</h1></div>
-                    <div class="desc-aquario">
-                        <div class="temperatura"><p id="temp_aquario_${item.id}">-°C</p></div>
-                        <div class="cor-alerta" id="card_${item.id}"></div>
-                    </div>
-                </div>
-            `
-        });
+
+    let listaDeQuestoes = [];
+    let numeroDaQuestaoAtual = 0;
+    let quantidadeDeQuestoes = 0;
+
+    async function iniciarQuiz() {
+
+        try {
+
+            const resposta = await fetch("/quiz/perguntas");
+
+            if (!resposta.ok) {
+                throw new Error("Erro ao buscar perguntas");
+            }
+
+            listaDeQuestoes = await resposta.json();
+
+            quantidadeDeQuestoes = listaDeQuestoes.length;
+
+            if (quantidadeDeQuestoes <= 0) {
+
+                alert("Nenhuma pergunta cadastrada.");
+
+                return;
+            }
+
+            document.getElementById("jogo").style.display = "flex";
+
+            document.getElementById("btnIniciarQuiz").style.display = "none";
+
+            document.getElementById("qtdQuestoes").innerHTML = quantidadeDeQuestoes;
+
+            preencherHTMLcomQuestaoAtual(0);
+
+            btnSubmeter.disabled = false;
+
+            btnProx.disabled = true;
+
+        } catch (erro) {
+
+            console.error("Erro ao iniciar quiz:", erro);
+
+            alert("Erro ao carregar quiz");
+        }
     }
-
-    // ── Quiz ──────────────────────────────────────────────────────────────────
-
-    const listaDeQuestoes = [
-        { pergunta: "Qual mês tem 30 dias?", alternativaA: "Janeiro", alternativaB: "Dezembro", alternativaC: "Junho", alternativaD: "Agosto", alternativaCorreta: "alternativaC" },
-        { pergunta: "Quantas horas tem em um dia?", alternativaA: "30 horas", alternativaB: "38 horas", alternativaC: "48 horas", alternativaD: "24 horas", alternativaCorreta: "alternativaD" },
-        { pergunta: "Qual destes números é ímpar?", alternativaA: "Dez", alternativaB: "Doze", alternativaC: "Oito", alternativaD: "Onze", alternativaCorreta: "alternativaD" }
-    ]
-
-    let numeroDaQuestaoAtual = 0, pontuacaoFinal = 0, tentativaIncorreta = 0, certas = 0, erradas = 0
-    const quantidadeDeQuestoes = listaDeQuestoes.length
-
-
-   function iniciarQuiz() {
-    document.getElementById('jogo').style.display = "flex";
-    document.getElementById('btnIniciarQuiz').style.display = "none";
-    document.getElementById('qtdQuestoes').innerHTML = quantidadeDeQuestoes;
-    preencherHTMLcomQuestaoAtual(0);
-    btnSubmeter.disabled = false;
-    btnProx.disabled = true;
-}
 
     function preencherHTMLcomQuestaoAtual(index) {
-        habilitarAlternativas(true)
-        const q = listaDeQuestoes[index]
-        numeroDaQuestaoAtual = index
-        document.getElementById("spanNumeroDaQuestaoAtual").innerHTML = index + 1
-        document.getElementById("spanQuestaoExibida").innerHTML = q.pergunta
-        document.getElementById("labelOpcaoUm").innerHTML = q.alternativaA
-        document.getElementById("labelOpcaoDois").innerHTML = q.alternativaB
-        document.getElementById("labelOpcaoTres").innerHTML = q.alternativaC
-        document.getElementById("labelOpcaoQuatro").innerHTML = q.alternativaD
+
+        habilitarAlternativas(true);
+
+        const q = listaDeQuestoes[index];
+
+        numeroDaQuestaoAtual = index;
+
+        document.getElementById("spanNumeroDaQuestaoAtual").innerHTML = index + 1;
+
+        // ===== ENUNCIADO VINDO DO BANCO =====
+        document.getElementById("spanQuestaoExibida").innerHTML = q.enunciado;
+
+        // ===== ALTERNATIVAS FIXAS =====
+        document.getElementById("labelOpcaoUm").innerHTML = "Alternativa A";
+
+        document.getElementById("labelOpcaoDois").innerHTML = "Alternativa B";
+
+        document.getElementById("labelOpcaoTres").innerHTML = "Alternativa C";
+
+        document.getElementById("labelOpcaoQuatro").innerHTML = "Alternativa D";
     }
 
-    function submeter() {
-        const options = document.getElementsByName("option")
-        const hasChecked = [...options].some(o => o.checked)
-        if (!hasChecked) { alert("Escolha uma opção."); return }
-        btnSubmeter.disabled = true
-        btnProx.disabled = false
-        habilitarAlternativas(false)
-        checarResposta()
+    async function submeter() {
+
+        const options = document.getElementsByName("option");
+
+        const hasChecked = [...options].some(o => o.checked);
+
+        if (!hasChecked) {
+
+            alert("Escolha uma alternativa.");
+
+            return;
+        }
+
+        btnSubmeter.disabled = true;
+
+        habilitarAlternativas(false);
+
+        const alternativaSelecionada =
+           [...options].find(o => o.checked).value.slice(-1);
+
+        const perguntaAtual =
+            listaDeQuestoes[numeroDaQuestaoAtual];
+
+        const idUsuario = sessionStorage.ID_USUARIO;
+
+        try {
+
+            const resposta = await fetch("/quiz/resposta", {
+
+                method: "POST",
+
+                headers: {
+                    "Content-Type": "application/json"
+                },
+
+                body: JSON.stringify({
+
+                    alternativaEscolhida: alternativaSelecionada,
+
+                    fkUsuario: idUsuario,
+
+                    fkPergunta: perguntaAtual.id
+                })
+            });
+
+            if (!resposta.ok) {
+
+                const erro = await resposta.json();
+
+                throw new Error(erro.mensagem);
+            }
+
+            console.log("Resposta cadastrada");
+
+        } catch (erro) {
+
+            console.error("Erro ao cadastrar resposta:", erro);
+
+            alert("Erro ao salvar resposta");
+        }
+
+        btnProx.disabled = false;
     }
 
     function habilitarAlternativas(enable) {
-        ['primeiraOpcao', 'segundaOpcao', 'terceiraOpcao', 'quartaOpcao'].forEach(id => {
-            document.getElementById(id).disabled = !enable
-        })
+
+        [
+            'primeiraOpcao',
+            'segundaOpcao',
+            'terceiraOpcao',
+            'quartaOpcao'
+        ].forEach(id => {
+
+            document.getElementById(id).disabled = !enable;
+        });
     }
 
- function avancar() {
-    numeroDaQuestaoAtual++; 
+    function avancar() {
 
-    btnProx.disabled = true;
-    btnSubmeter.disabled = false;
-    desmarcarRadioButtons();
-    limparCoresBackgroundOpcoes();
+        numeroDaQuestaoAtual++;
 
-    if (numeroDaQuestaoAtual < quantidadeDeQuestoes) {
-        preencherHTMLcomQuestaoAtual(numeroDaQuestaoAtual);
-    } else {
-        finalizarJogo();
-    }
-}
+        btnProx.disabled = true;
 
-    function tentarNovamente() { window.location.reload() }
+        btnSubmeter.disabled = false;
 
-    function checarResposta() {
-    const q = listaDeQuestoes[numeroDaQuestaoAtual];
-    const options = document.getElementsByName("option");
-    let labelCorreta = null;
+        desmarcarRadioButtons();
 
-    options.forEach(o => { 
-        if (o.value === q.alternativaCorreta) labelCorreta = o.labels[0].id; 
-    });
+        if (numeroDaQuestaoAtual < quantidadeDeQuestoes) {
 
-    options.forEach(o => {
-        if (o.checked) {
-            if (o.value === q.alternativaCorreta) {
-                document.getElementById(labelCorreta).classList.add("text-success-with-bg");
-                pontuacaoFinal++; 
-            } else {
-                document.getElementById(o.labels[0].id).classList.add("text-danger-with-bg");
-                document.getElementById(labelCorreta).classList.add("text-success-with-bg");
-            }
+            preencherHTMLcomQuestaoAtual(numeroDaQuestaoAtual);
+
+        } else {
+
+            finalizarJogo();
         }
-    });
-}
-
-    function limparCoresBackgroundOpcoes() {
-        document.getElementsByName("option").forEach(o => {
-            document.getElementById(o.labels[0].id).classList.remove("text-danger-with-bg", "text-success-with-bg")
-        })
     }
 
     function desmarcarRadioButtons() {
-        document.getElementsByName("option").forEach(o => o.checked = false)
+
+        document.getElementsByName("option")
+            .forEach(o => o.checked = false);
     }
 
-   function finalizarJogo() {
-    const pct = pontuacaoFinal / quantidadeDeQuestoes;
-    let msg, cls;
+    function finalizarJogo() {
 
-    // Define apenas a mensagem de texto baseada no desempenho
-    if (pct <= 0.3) { msg = "Quiz finalizado! Continue estudando para melhorar."; cls = "text-danger-with-bg"; }
-    else if (pct < 0.9) { msg = "Muito bem! Você concluiu o quiz."; cls = "text-warning-with-bg"; }
-    else { msg = "Parabéns! Você demonstrou domínio total do assunto."; cls = "text-success-with-bg"; }
+        document.getElementById("opcoes").style.display = "none";
 
-    // Esconde os elementos do quiz que não são mais necessários
-    document.getElementById('opcoes').style.display = "none";
-    document.getElementById('perguntaDaQuestaoAtual').style.display = "none";
-    document.getElementById('infoQuestao').style.display = "none";
-    
-    // Mostra a mensagem final
-    const divMsg = document.getElementById('msgFinal');
-    divMsg.innerHTML = msg;
-    divMsg.classList.add(cls);
-    divMsg.style.display = "block";
+        document.getElementById("perguntaDaQuestaoAtual").style.display = "none";
 
-    btnProx.style.display = "none";
-    btnSubmeter.style.display = "none";
-    
-    // Botão para recomeçar
-    btnTentarNovamente.style.display = "block";
-    btnTentarNovamente.disabled = false;
-}
+        document.getElementById("infoQuestao").style.display = "none";
+
+        btnSubmeter.style.display = "none";
+
+        btnProx.style.display = "none";
+
+        const divMsg = document.getElementById("msgFinal");
+
+        divMsg.innerHTML = "Quiz finalizado com sucesso.";
+
+        divMsg.style.display = "block";
+
+        btnTentarNovamente.style.display = "block";
+
+        btnTentarNovamente.disabled = false;
+    }
+
+    function tentarNovamente() {
+
+        window.location.reload();
+    }
+
 </script>
 
 </html>
