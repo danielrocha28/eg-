@@ -48,12 +48,60 @@ function listarPerguntas() {
     return database.executar(instrucaoSql);
 }
 
+function gerarResultado(idUsuario) {
+
+    var instrucaoSql = `
+        SELECT alternativa_escolhida, COUNT(*) AS total
+        FROM resposta
+        WHERE fkUsuario = ${idUsuario}
+        GROUP BY alternativa_escolhida
+        ORDER BY total DESC
+        LIMIT 1;
+    `;
+
+    console.log("Executando SQL:\n" + instrucaoSql);
+
+    return database.executar(instrucaoSql);
+}
+
+function salvarResultado(idUsuario, fkPerfil) {
+
+    var instrucaoSql = `
+        INSERT INTO resultado (fkUsuario, fkPerfil)
+        VALUES (${idUsuario}, ${fkPerfil})
+        ON DUPLICATE KEY UPDATE
+        fkPerfil = VALUES(fkPerfil);
+    `;
+
+    return database.executar(instrucaoSql);
+}
+
+function buscarResultado(idUsuario) {
+
+    var instrucaoSql = `
+        SELECT 
+            p.nome,
+            p.descricao
+        FROM resultado r
+        JOIN perfil p
+            ON r.fkPerfil = p.id
+        WHERE r.fkUsuario = ${idUsuario};
+    `;
+
+    console.log("Executando SQL:\n" + instrucaoSql);
+
+    return database.executar(instrucaoSql);
+}
+
 
 
 
 module.exports = {
     postarPergunta,
-   cadastrarResposta,
+    cadastrarResposta,
     listarRespostasDoUsuario,
-    listarPerguntas
+    listarPerguntas,
+    gerarResultado,
+    salvarResultado,
+    buscarResultado
 };

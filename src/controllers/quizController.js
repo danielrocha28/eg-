@@ -1,4 +1,4 @@
-var QuizModel = require("../models/quizModel");
+var quizModel = require("../models/quizModel");
 
 
 async function postarPergunta(req, res) {
@@ -11,7 +11,7 @@ async function postarPergunta(req, res) {
             });
         }
 
-        const resultado = await QuizModel.postarPergunta(enunciado);
+        const resultado = await quizModel.postarPergunta(enunciado);
         
         res.status(201).json({
             mensagem: "Pergunta cadastrada com sucesso!",
@@ -39,7 +39,7 @@ function cadastrarResposta(req, res) {
         });
     }
 
-    QuizModel.cadastrarResposta(alternativaEscolhida, idUsuario, idPergunta)
+    quizModel.cadastrarResposta(alternativaEscolhida, idUsuario, idPergunta)
         .then(function (resultado) {
             res.status(201).json({
                 mensagem: "Resposta cadastrada com sucesso!"
@@ -56,7 +56,7 @@ function cadastrarResposta(req, res) {
 
 function listarPerguntas(req, res) {
 
-    QuizModel.listarPerguntas()
+    quizModel.listarPerguntas()
         .then(function(resultado) {
 
             res.status(200).json(resultado);
@@ -71,6 +71,54 @@ function listarPerguntas(req, res) {
         });
 }
 
+function gerarResultado(req, res) {
+
+    var idUsuario = req.params.idUsuario;
+
+    quizModel.gerarResultado(idUsuario)
+        .then(function(resultado) {
+
+            var letra = resultado[0].alternativa_escolhida;
+
+            var mapaPerfis = {
+                A: 1,
+                B: 2,
+                C: 3,
+                D: 4,
+                E: 5,
+                F: 6
+            };
+
+            var fkPerfil = mapaPerfis[letra];
+
+            return quizModel.salvarResultado(idUsuario, fkPerfil);
+
+        })
+        .then(function() {
+            res.status(200).send("Resultado salvo!");
+        })
+        .catch(function(erro) {
+            console.log(erro);
+            res.status(500).json(erro.sqlMessage);
+        });
+}
+
+function buscarResultado(req, res) {
+
+    var idUsuario = req.params.idUsuario;
+
+    quizModel.buscarResultado(idUsuario)
+        .then(function(resultado) {
+            res.json(resultado);
+        })
+        .catch(function(erro) {
+            console.log(erro);
+            res.status(500).json(erro.sqlMessage);
+        });
+}
+
+
+
 // // POST /quiz
 // function cadastrarQuiz(req, res) {
 //     var titulo = req.body.titulo;
@@ -84,7 +132,7 @@ function listarPerguntas(req, res) {
 //         });
 //     }
 
-//     QuizModel.cadastrarQuiz(titulo, descricao, idUsuario)
+//     quizModel.cadastrarQuiz(titulo, descricao, idUsuario)
 //         .then(function(resultado) {
 //             res.status(201).json({
 //                 mensagem: "Quiz cadastrado com sucesso!",
@@ -101,7 +149,7 @@ function listarPerguntas(req, res) {
 // function listarQuizzes(req, res) {
 //     var idUsuario = req.params.idUsuario;
 
-//     QuizModel.listarQuizzesPorUsuario(idUsuario)
+//     quizModel.listarQuizzesPorUsuario(idUsuario)
 //         .then(function(quizzes) {
 //             if (quizzes.length === 0) {
 //                 return res.status(404).json({ mensagem: "Nenhum quiz encontrado" });
@@ -118,7 +166,7 @@ function listarPerguntas(req, res) {
 // function listarPerguntas(req, res) {
 //     var idQuiz = req.params.idQuiz;
 
-//     QuizModel.listarPerguntasPorQuiz(idQuiz)
+//     quizModel.listarPerguntasPorQuiz(idQuiz)
 //         .then(function(perguntas) {
 //             if (perguntas.length === 0) {
 //                 return res.status(404).json({ mensagem: "Nenhuma pergunta encontrada" });
@@ -137,7 +185,7 @@ function listarPerguntas(req, res) {
 //     var idUsuario = req.params.idUsuario;
 //     var idQuiz = req.params.idQuiz;
 
-//     QuizModel.buscarResultado(idUsuario, idQuiz)
+//     quizModel.buscarResultado(idUsuario, idQuiz)
 //         .then(function(resultado) {
 //             if (resultado.length === 0) {
 //                 return res.status(404).json({ mensagem: "Resultado não encontrado" });
@@ -154,6 +202,8 @@ module.exports = {
     postarPergunta,
     cadastrarResposta,
     // listarQuizzes,
-     listarPerguntas
+     listarPerguntas,
+     gerarResultado,
+     buscarResultado
     // resultadoDoQuiz
 };

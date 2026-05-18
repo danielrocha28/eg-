@@ -365,28 +365,62 @@
             .forEach(o => o.checked = false);
     }
 
-    function finalizarJogo() {
+ async function finalizarJogo() {
 
-        document.getElementById("opcoes").style.display = "none";
+    document.getElementById("opcoes").style.display = "none";
 
-        document.getElementById("perguntaDaQuestaoAtual").style.display = "none";
+    document.getElementById("perguntaDaQuestaoAtual").style.display = "none";
 
-        document.getElementById("infoQuestao").style.display = "none";
+    document.getElementById("infoQuestao").style.display = "none";
 
-        btnSubmeter.style.display = "none";
+    btnSubmeter.style.display = "none";
 
-        btnProx.style.display = "none";
+    btnProx.style.display = "none";
 
-        const divMsg = document.getElementById("msgFinal");
+    const divMsg = document.getElementById("msgFinal");
 
-        divMsg.innerHTML = "Quiz finalizado com sucesso.";
+    const idUsuario = sessionStorage.ID_USUARIO;
 
-        divMsg.style.display = "block";
+    try {
 
-        btnTentarNovamente.style.display = "block";
+        // GERA O RESULTADO
+        const respostaGerar = await fetch(`/quiz/resultado/${idUsuario}`, {
+            method: "POST"
+        });
 
-        btnTentarNovamente.disabled = false;
+        if (!respostaGerar.ok) {
+            throw new Error("Erro ao gerar resultado");
+        }
+
+        // BUSCA O RESULTADO
+        const respostaBuscar = await fetch(`/quiz/resultado/${idUsuario}`);
+
+        if (!respostaBuscar.ok) {
+            throw new Error("Erro ao buscar resultado");
+        }
+
+        const resultado = await respostaBuscar.json();
+
+        divMsg.innerHTML = `
+            <h2>${resultado[0].nome}</h2>
+            <p>${resultado[0].descricao}</p>
+        `;
+
+    } catch (erro) {
+
+        console.error(erro);
+
+        divMsg.innerHTML = `
+            <h2>Erro ao gerar resultado</h2>
+        `;
     }
+
+    divMsg.style.display = "block";
+
+    btnTentarNovamente.style.display = "block";
+
+    btnTentarNovamente.disabled = false;
+}
 
     function tentarNovamente() {
 

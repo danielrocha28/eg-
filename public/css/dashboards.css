@@ -97,7 +97,7 @@ margin: 0 auto;
   border: 1px solid rgba(0,0,0,0.05);
   padding: 38px;
   width: 100%;
-  max-width: 550px;
+  max-width: 750px;
   transition: var(--transition);
 }
 
