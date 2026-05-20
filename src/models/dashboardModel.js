@@ -1,3 +1,5 @@
+var database = require("../database/config");
+
 function listarPerfis() {
 
     var instrucaoSql = `

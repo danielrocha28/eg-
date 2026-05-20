@@ -6,7 +6,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ego | Dashboards</title>
+    <title>Ego | Dashboard </title>
 
     
     <link rel="stylesheet" href="./../css/dashboards.css">
@@ -61,11 +61,8 @@
 
         <div class="dash">
             <div id="alerta">
-            </div>
+        </div>
 
-            <div class="btns-dash" id="btnAquario">
-                <!-- O gráfico é chamado de acordo com o id (fk_aquario) do banco  -->
-            </div>
             <div id="graficos">
             </div>
         </div>
@@ -76,208 +73,114 @@
 </html>
 
 <script>
+   
+   b_usuario.innerHTML = sessionStorage.NOME_USUARIO;
+    window.onload = function () {
+
     b_usuario.innerHTML = sessionStorage.NOME_USUARIO;
 
-    let proximaAtualizacao;
+    carregarGrafico();
+}
 
-    window.onload = exibirQuizzesDoUsuario();
+function obterDadosGrafico() {
 
-    function exibirQuizzesDoUsuario() {
-        var quizzes = JSON.parse(sessionStorage.QUIZZES);
-        quizzes.forEach(item => {
-            document.getElementById("btnAquario").innerHTML += `
-            <button class="btn-chart" onclick="exibirQuizzes(${item.id})" id="btnAquario${item.id}">${item.descricao}</button>
-            `
+    fetch("/dashboard/perfis", { cache: "no-store" })
 
-            document.getElementById("graficos").innerHTML += `
-                <div id="grafico${item.id}" class="display-none">
-                    <h3 class="tituloGraficos">
-                        <span id="tituloAquario${item.id}">${item.descricao}</span>
-                    </h3>
-                    <div class="graph">
-                        <canvas id="myChartCanvas${item.id}"></canvas>
-                    </div>
-                    <div class="label-captura">
-                        <p id="avisoCaptura${item.id}" style="color: white"></p>
-                    </div>
-                </div>
-            `
+        .then(function(response) {
 
-            obterDadosGrafico(item.id)
+            if (response.ok) {
+
+                response.json().then(function(resposta) {
+
+                    console.log(resposta);
+
+                    plotarGrafico(resposta);
+
+                });
+
+            } else {
+
+                console.error("Erro ao buscar dados");
+
+            }
+        })
+
+        .catch(function(erro) {
+
+            console.error(erro);
+
         });
+}
 
-        if (quizzes.length > 0) {
-            exibirQuizzes(quizzes[0].id)
-        }
+  function plotarGrafico(resposta) {
+
+    let labels = [];
+
+    let dados = {
+
+        labels: labels,
+
+        datasets: [{
+
+            label: "Quantidade de Usuários",
+
+            data: [],
+
+            borderWidth: 1
+        }]
+    };
+
+    for (let i = 0; i < resposta.length; i++) {
+
+        let registro = resposta[i];
+
+        labels.push(registro.nome);
+
+        dados.datasets[0].data.push(registro.total);
     }
 
-    function alterarTitulo(id) {
-        var tituloAquario = document.getElementById(`tituloAquario${id}`)
-        var descricao = JSON.parse(sessionStorage.QUIZZES).find(item => item.id == id).descricao;
-        tituloAquario.innerHTML = "Últimas medidas de Temperatura e Umidade do <span style='color: #e6005a'>" + descricao + "</span>"
-    }
+    const config = {
 
-    function exibirQuizzes(id) {
-        let todosOsGraficos = JSON.parse(sessionStorage.QUIZZES);
+        type: "bar",
 
-        for (i = 0; i < todosOsGraficos.length; i++) {
-            // exibindo - ou não - o gráfico
-            if (todosOsGraficos[i].id != id) {
-                let elementoAtual = document.getElementById(`grafico${todosOsGraficos[i].id}`)
-                if (elementoAtual.classList.contains("display-block")) {
-                    elementoAtual.classList.remove("display-block")
+        data: dados,
+
+        options: {
+
+            responsive: true,
+
+            scales: {
+                y: {
+                    beginAtZero: true
                 }
-                elementoAtual.classList.add("display-none")
-
-                // alterando estilo do botão
-                let btnAtual = document.getElementById(`btnAquario${todosOsGraficos[i].id}`) 
-                if (btnAtual.classList.contains("btn-pink")) {
-                    btnAtual.classList.remove("btn-pink")
-                }
-                btnAtual.classList.add("btn-white")
             }
         }
+    };
 
-        // exibindo - ou não - o gráfico
-        let graficoExibir = document.getElementById(`grafico${id}`) 
-        graficoExibir.classList.remove("display-none")
-        graficoExibir.classList.add("display-block")
+    new Chart(
+        document.getElementById("myChartCanvas"),
+        config
+    );
+}
 
-        // alterando estilo do botão
-        let btnExibir = document.getElementById(`btnAquario${id}`) 
-        btnExibir.classList.remove("btn-white")
-        btnExibir.classList.add("btn-pink")
-    }
+function carregarGrafico() {
 
-    function obterDadosGrafico(id) {
+    document.getElementById("graficos").innerHTML = `
 
-        alterarTitulo(id)
+        <div id="graficoPerfis">
 
-        if (proximaAtualizacao != undefined) {
-            clearTimeout(proximaAtualizacao);
-        }
+            <h3 class="tituloGraficos">
+                Distribuição dos Perfis Filosóficos
+            </h3>
 
-        fetch(`/resultado/${id}`, { cache: 'no-store' }).then(function (response) {
-            if (response.ok) {
-                response.json().then(function (resposta) {
-                    console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
-                    resposta.reverse();
+            <div class="graph">
+                <canvas id="myChartCanvas"></canvas>
+            </div>
 
-                    plotarGrafico(resposta, id);
+        </div>
+    `;
 
-                });
-            } else {
-                console.error('Nenhum dado encontrado ou erro na API');
-            }
-        })
-            .catch(function (error) {
-                console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
-            });
-    }
+    obterDadosGrafico();
+}
 
-    function plotarGrafico(resposta, id) {
-
-        console.log('iniciando plotagem do gráfico...');
-
-        let labels = [];
-
-        let dados = {
-            labels: labels,
-            datasets: [{
-                label: 'Umidade',
-                data: [],
-                fill: false,
-                borderColor: 'rgb(75, 192, 192)',
-                tension: 0.1
-            },
-            {
-                label: 'Temperatura',
-                data: [],
-                fill: false,
-                borderColor: 'rgb(199, 52, 52)',
-                tension: 0.1
-            }]
-        };
-
-        console.log('----------------------------------------------')
-        console.log('Estes dados foram recebidos pela funcao "obterDadosGrafico" e passados para "plotarGrafico":')
-        console.log(resposta)
-
-        for (i = 0; i < resposta.length; i++) {
-            var registro = resposta[i];
-            labels.push(registro.momento_grafico);
-            dados.datasets[0].data.push(registro.umidade);
-            dados.datasets[1].data.push(registro.temperatura);
-        }
-
-        console.log('----------------------------------------------')
-        console.log('O gráfico será plotado com os respectivos valores:')
-        console.log('Labels:')
-        console.log(labels)
-        console.log('Dados:')
-        console.log(dados.datasets)
-        console.log('----------------------------------------------')
-
-        const config = {
-            type: 'line',
-            data: dados,
-        };
-
-        let myChart = new Chart(
-            document.getElementById(`myChartCanvas${id}`),
-            config
-        );
-
-        setTimeout(() => atualizarGrafico(id, dados, myChart), 2000);
-    }
-
-    function atualizarGrafico(id, dados, myChart) {
-
-        fetch(`/resultado/${id}`, { cache: 'no-store' }).then(function (response) {
-            if (response.ok) {
-                response.json().then(function (novoRegistro) {
-
-                    obterdados(id);
-                    console.log(`Dados recebidos: ${JSON.stringify(novoRegistro)}`);
-                    console.log(`Dados atuais do gráfico:`);
-                    console.log(dados);
-
-                    let avisoCaptura = document.getElementById(`avisoCaptura${id}`)
-                    avisoCaptura.innerHTML = ""
-
-                    if (novoRegistro[0].momento_grafico == dados.labels[dados.labels.length - 1]) {
-                        console.log("---------------------------------------------------------------")
-                        console.log("Como não há dados novos para captura, o gráfico não atualizará.")
-                        avisoCaptura.innerHTML = "<i class='fa-solid fa-triangle-exclamation'></i> Foi trazido o dado mais atual capturado pelo sensor. <br> Como não há dados novos a exibir, o gráfico não atualizará."
-                        console.log("Horário do novo dado capturado:")
-                        console.log(novoRegistro[0].momento_grafico)
-                        console.log("Horário do último dado capturado:")
-                        console.log(dados.labels[dados.labels.length - 1])
-                        console.log("---------------------------------------------------------------")
-                    } else {
-                        dados.labels.shift();
-                        dados.labels.push(novoRegistro[0].momento_grafico);
-
-                        dados.datasets[0].data.shift();
-                        dados.datasets[0].data.push(novoRegistro[0].umidade);
-
-                        dados.datasets[1].data.shift();
-                        dados.datasets[1].data.push(novoRegistro[0].temperatura);
-
-                        myChart.update();
-                    }
-
-                    
-                    proximaAtualizacao = setTimeout(() => atualizarGrafico(id, dados, myChart), 2000);
-                });
-            } else {
-                console.error('Nenhum dado encontrado ou erro na API');
-                
-                proximaAtualizacao = setTimeout(() => atualizarGrafico(id, dados, myChart), 2000);
-            }
-        })
-            .catch(function (error) {
-                console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
-            });
-    }
 </script>
