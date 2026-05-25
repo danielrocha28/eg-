@@ -2,7 +2,7 @@
 <html lang="pt-br">
 
 <head>
-    <link rel="shortcut icon" href="../assets/icon/favicon2.ico" type="image/x-icon">
+    <link rel="shortcut icon" href="../assets/imgs/logo-cima.png" type="image/x-icon">
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -112,46 +112,98 @@ function obterDadosGrafico() {
         });
 }
 
-  function plotarGrafico(resposta) {
-
+ function plotarGrafico(resposta) {
     let labels = [];
 
     let dados = {
-
         labels: labels,
-
         datasets: [{
-
-            label: "Quantidade de Usuários",
-
-            data: [],
-
-            borderWidth: 1
+            label: "Porcentagem de Usuários (%)",
+            data: [], // Os dados vão entrar aqui pelo loop abaixo
+            
+            // Cores ajustadas para o estilo "Teia" (Radar)
+            borderColor: 'white', // Rosa Neon sólido
+            borderWidth: 3,
+            backgroundColor: 'rgba(230, 0, 92, 0.2)', // Rosa transparente no meio
+            
+            // Estilo dos "pontos" em cada extremidade
+            pointBackgroundColor: 'rgba(34, 193, 195, 1)', // Ciano
+            pointBorderColor: '#fff',
+            pointHoverBackgroundColor: '#fff',
+            pointHoverBorderColor: 'white'
         }]
     };
 
+    let totalUsuarios = 0;
     for (let i = 0; i < resposta.length; i++) {
-
-        let registro = resposta[i];
-
-        labels.push(registro.nome);
-
-        dados.datasets[0].data.push(registro.total);
+        totalUsuarios += Number(resposta[i].total);
     }
 
-    const config = {
+    for (let i = 0; i < resposta.length; i++) {
+        let registro = resposta[i];
+        labels.push(registro.nome);
+        
+        let porcentagem = (registro.total / totalUsuarios) * 100;
+        
+        dados.datasets[0].data.push(porcentagem.toFixed(1)); 
+    }
 
-        type: "bar",
 
+   const config = {
+        type: "radar",
         data: dados,
-
         options: {
-
             responsive: true,
-
+            maintainAspectRatio: false,
+            layout: {
+                padding: 10
+            },
             scales: {
-                y: {
-                    beginAtZero: true
+                r: {
+                    min: 0,
+                    suggestedMax: 50, // Mantive o suggestedMax para o gráfico ficar grande
+                    
+                    // 1. Cor das linhas circulares (a teia em si)
+                    grid: {
+                        color: 'rgba(255, 255, 255, 0.15)' 
+                    },
+                    
+                    // 2. Cor das linhas diagonais que saem do centro
+                    angleLines: {
+                        color: 'rgba(255, 255, 255, 0.15)'
+                    },
+
+                    ticks: {
+                        stepSize: 20,
+                        callback: function(value) {
+                            return value + '%';
+                        },
+                        font: { family: "'Exo 2', sans-serif", size: 10 },
+                        backdropColor: 'transparent', // Tira o fundo quadrado dos números
+                        
+                        // 3. Cor dos números das porcentagens (20%, 40%...)
+                        color: 'rgba(255, 255, 255, 0.6)' 
+                    },
+
+                    pointLabels: {
+                        font: { family: "'Exo 2', sans-serif", size: 13, weight: '600' },
+                        
+                        // 4. Cor dos títulos nas pontas (Liberdade Radical, etc.)
+                        color: '#ffffff', 
+                        padding: 15
+                    }
+                }
+            },
+            plugins: {
+                legend: {
+                    display: false 
+                },
+                tooltip: {
+                    callbacks: {
+                        label: function(context) {
+                            return context.raw + '% dos usuários';
+                        }
+                    }
                 }
             }
         }
@@ -164,16 +216,14 @@ function obterDadosGrafico() {
 }
 
 function carregarGrafico() {
-
     document.getElementById("graficos").innerHTML = `
-
-        <div id="graficoPerfis">
-
-            <h3 class="tituloGraficos">
+        <div id="graficoPerfis" style="width: 100%; max-width: 900px; display: flex; flex-direction: column; align-items: center; color: white">
+            
+            <h3 class="tituloGraficos" style="color: var(--text-main); margin-bottom: 20px; font-family: 'Exo 2', sans-serif;">
                 Distribuição dos Perfis Filosóficos
             </h3>
 
-            <div class="graph">
+            <div class="grafico-container">
                 <canvas id="myChartCanvas"></canvas>
             </div>
 
@@ -182,5 +232,4 @@ function carregarGrafico() {
 
     obterDadosGrafico();
 }
-
 </script>

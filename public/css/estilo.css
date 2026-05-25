@@ -282,14 +282,14 @@ body {
 }
 
 .modal {
-  display: none; /* Oculto por padrão */
+  display: none; 
   position: fixed;
   z-index: 1000;
   left: 0;
   top: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.6); /* Fundo escuro semi-transparente */
+  background-color: rgba(0, 0, 0, 0.6); 
   backdrop-filter: blur(4px);
   opacity: 0;
   transition: opacity 0.3s ease;
@@ -303,7 +303,7 @@ body {
 }
 
 .modal-content {
-  background-color: #f7ecd6; /* var(--creme) */
+  background-color: #f7ecd6; 
   padding: 40px;
   border-radius: 8px;
   width: 90%;
@@ -433,6 +433,101 @@ body {
   text-align: justify;
 }
 
+.destaque-video {
+  padding: 60px 0;
+  background-color: #fff;
+}
+
+.container-destaque {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.destaque-header {
+  margin-bottom: 40px;
+}
+
+.destaque-header h2 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 36px;
+  color: #2C2C2A;
+  margin: 0;
+  display: inline-block;
+  margin-right: 15px;
+}
+
+.destaque-grid {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+}
+
+.destaque-item {
+  position: relative;
+  overflow: hidden;
+  border-radius: 4px;
+}
+
+.destaque-item.tall {
+  width: 38%;
+  height: 600px;
+}
+
+.destaque-item.small {
+  width: 20%;
+  height: 300px; 
+}
+
+.destaque-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.2s ease;
+}
+
+.destaque-item:hover img {
+  transform: scale(1.05);
+}
+
+.destaque-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.4);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  color: white;
+  padding: 20px;
+}
+
+.destaque-overlay h3 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 28px;
+  font-weight: 600;
+  margin: 10px 0;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+.destaque-overlay p {
+  font-family: 'Courier Prime', monospace;
+  font-size: 14px;
+  margin: 0;
+  letter-spacing: 1px;
+}
+
+.play-icon {
+  font-size: 48px;
+  margin-top: 15px;
+  color: white;
+  opacity: 0.9;
+  transition: opacity 0.3s;
+}
+
 /* QUIZ */
 
 .quiz {
@@ -475,6 +570,11 @@ body {
   gap: 10px;
   width: calc(33.33% - 20px); 
   min-width: 80px;
+  transition: transform 0.3s ease;
+}
+
+.house-item:hover {
+  transform: translateY(-4px);
 }
 
 .house-banner {

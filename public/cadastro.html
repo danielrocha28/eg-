@@ -11,7 +11,7 @@
   <script src="./js/sessao.js"></script>
 
   <link rel="stylesheet" href="./css/estilo.css" />
-  <link rel="icon" href="./assets/icon/favicon2.ico" />
+  <link rel="icon" href="../assets/imgs/logo-cima.png" />
   <link rel="preconnect" href="https://fonts.gstatic.com" />
 </head>
 
@@ -92,44 +92,33 @@
   let listaEmpresasCadastradas = [];
 
   function cadastrar() {
-    // aguardar();
-
-    //Recupere o valor da nova input pelo nome do id
-    // Agora vá para o método fetch logo abaixo
     var nomeVar = nome_input.value;
     var emailVar = email_input.value;
     var senhaVar = senha_input.value;
     var confirmacaoSenhaVar = confirmacao_senha_input.value;
 
-    // Verificando se há algum campo em branco
-    if (
-      nomeVar == "" ||
-      emailVar == "" ||
-      senhaVar == "" ||
-      confirmacaoSenhaVar == "" 
-    ) {
-      cardErro.style.display = "block";
-      mensagem_erro.innerHTML =
-        "(Mensagem de erro para todos os campos em branco)";
+    nomeVar = nomeVar.trim();
+    emailVar = emailVar.trim();
 
-      finalizarAguardar();
-      return false;
-    } else {
-      setInterval(sumirMensagem, 5000);
+    if (nomeVar == "" || emailVar == "" || senhaVar == "" || confirmacaoSenhaVar == "") {
+        exibirErro("Todos os campos são obrigatórios!");
+        return false;
     }
 
-    // Verificando se o código de ativação é de alguma empresa cadastrada
-    // for (let i = 0; i < listaEmpresasCadastradas.length; i++) {
-    //   if (listaEmpresasCadastradas[i].codigo_ativacao == codigoVar) {
-    //     idEmpresaVincular = listaEmpresasCadastradas[i].id
-    //     console.log("Código de ativação válido.");
-    //     break;
-    //   } else {
-    //     cardErro.style.display = "block";
-    //     mensagem_erro.innerHTML = "(Mensagem de erro para código inválido)";
-    //     finalizarAguardar();
-    //   }
-    // }
+    if (emailVar.indexOf("@") == -1 || emailVar.indexOf(".com") == -1) {
+        exibirErro("E-mail inválido! falta @ ou .com");
+        return false;
+    }
+
+    if (senhaVar != confirmacaoSenhaVar) {
+        exibirErro("As senhas não coincidem!");
+        return false;
+    }
+
+    if(senhaVar.lenght < 5) {
+      exibirErro("A senha não pode ser menor que 5 dígitos!");
+        return false;
+    }
 
     // Enviando o valor da nova input
     fetch("/usuarios/cadastrar", {
@@ -172,7 +161,13 @@
     return false;
   }
 
+
   // Listando empresas cadastradas 
+function exibirErro(mensagem) {
+    cardErro.style.display = "block";
+    mensagem_erro.innerHTML = mensagem;
+    setTimeout(sumirMensagem, 3000); // Oculta automaticamente após 3 segundos
+}
 
   function sumirMensagem() {
     cardErro.style.display = "none";

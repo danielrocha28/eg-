@@ -48,91 +48,141 @@
         <div class="dash">
 
             <div id="pontuacaoEJogo" class="quiz">
-                <div id="telaInicial">
-                    <div class="quiz-houses">
-                        
-                        <h1>Qual consciência filosófica habita sua existência?</h1>
-                        
-                        <div class="house-item" data-id="absurdo" style="cursor: pointer;">
-                            <div class="house-banner" style="background:#7F77DD;"><span>∅</span></div>
-                            <span class="house-name">Filosofia do Absurdo</span>
-                        </div>
-                        <div class="house-item" data-id="liberdade" style="cursor: pointer;">
-                            <div class="house-banner" style="background:#e6005a;"><span>∞</span></div>
-                            <span class="house-name">Liberdade Radical</span>
-                        </div>
-                        <div class="house-item" data-id="fe" style="cursor: pointer;">
-                            <div class="house-banner" style="background:#1D9E75;"><span>✝</span></div>
-                            <span class="house-name">Fé e Angústia</span>
-                        </div>
-                        <div class="house-item" data-id="niilismo" style="cursor: pointer;">
-                            <div class="house-banner" style="background:#2C2C2A;"><span>⊘</span></div>
-                            <span class="house-name">Niilismo</span>
-                        </div>
-                        <div class="house-item" data-id="humanista" style="cursor: pointer;">
-                            <div class="house-banner" style="background:#32b9cd;"><span>◎</span></div>
-                            <span class="house-name">Existencialismo Humanista</span>
-                        </div>
-                        <div class="house-item" data-id="fenomenologico" style="cursor: pointer;">
-                            <div class="house-banner" style="background:#BA7517;"><span>◈</span></div>
-                            <span class="house-name">Existencialismo Fenomenológico</span>
-                        </div>
-                    </div>
 
-                    <div class="quiz-cta">
-                        <button class="btn-quiz-1" onclick="iniciarQuiz()">Descobrir agora</button>
-                    </div>
-                </div> <div id="jogo" style="display: none;">
-                    <div id="infoQuestao">
-                       <span>Questão <span id="spanNumeroDaQuestaoAtual"></span> de <span id="qtdQuestoes"></span> 
+    <div id="telaInicial">
 
-                    </div>
+        <div class="quiz-intro-card">
 
-                    <div id="perguntaDaQuestaoAtual">
-                        <span id="spanQuestaoExibida"></span>
-                    </div>
+            <div class="quiz-card-header">
 
-                    <div id="opcoes">
-                        <span>
-                            <input type="radio" id="primeiraOpcao" name="option" value="alternativaA" />
-                            <label for="primeiraOpcao" id="labelOpcaoUm"></label>
-                        </span>
-                        <span>
-                            <input type="radio" id="segundaOpcao" name="option" value="alternativaB" />
-                            <label for="segundaOpcao" id="labelOpcaoDois"></label>
-                        </span>
-                        <span>
-                            <input type="radio" id="terceiraOpcao" name="option" value="alternativaC" />
-                            <label for="terceiraOpcao" id="labelOpcaoTres"></label>
-                        </span>
-                        <span>
-                            <input type="radio" id="quartaOpcao" name="option" value="alternativaD" />
-                            <label for="quartaOpcao" id="labelOpcaoQuatro"></label>
-                        </span>
-                        <span>
-                            <input type="radio" id="quintaOpcao" name="option" value="alternativaE" />
-                            <label for="quintaOpcao" id="labelOpcaoCinco"></label>
-                        </span>
-                        <span>
-                            <input type="radio" id="sextaOpcao" name="option" value="alternativaF" />
-                            <label for="sextaOpcao" id="labelOpcaoSeis"></label>
-                        </span>
-                    </div>
-
-                    <div id="botoes">
-                        <button onclick="submeter()" id="btnSubmeter">Submeter resposta</button>
-
-                        <div id="msgFinal" style="display: none; margin-top: 20px; padding: 15px; border-radius: 12px; text-align: center;"></div>
-
-                        <button onclick="tentarNovamente()" id="btnTentarNovamente" disabled style="display: none;">Reiniciar Quiz</button>
-                    </div>
+                <div class="quiz-card-badges">
+                    <span class="quiz-pill pill-type">Filosofia</span>
+                    <span class="quiz-pill pill-count">10 questões</span>
                 </div>
+
+                <h2>Qual consciência filosófica habita sua existência?</h2>
+
+                <p>
+                    Descubra qual corrente do existencialismo mais ressoa com sua forma de ver o mundo.
+                </p>
+
+                <div class="quiz-symbols">
+                    <div class="sym" style="background:#7F77DD22; color:#AFA9EC;">∅</div>
+                    <div class="sym" style="background:#e6005a22; color:#F4C0D1;">∞</div>
+                    <div class="sym" style="background:#1D9E7522; color:#5DCAA5;">✝</div>
+                    <div class="sym" style="background:#2C2C2A; color:rgba(255,255,255,0.4); border-color:rgba(255,255,255,0.15);">⊘</div>
+                    <div class="sym" style="background:#32b9cd22; color:#85B7EB;">◎</div>
+                    <div class="sym" style="background:#BA751722; color:#EF9F27;">◈</div>
+                </div>
+
             </div>
 
-            <div class="cards" id="cardAquarios"></div>
+            <div class="quiz-card-body">
+
+                <div class="quiz-meta">
+
+                    <div class="meta-item">
+                        <span class="meta-label">Perguntas</span>
+                        <span class="meta-value">10</span>
+                    </div>
+
+                    <div class="meta-item">
+                        <span class="meta-label">Tempo est.</span>
+                        <span class="meta-value">10 min</span>
+                    </div>
+
+                    <div class="meta-item">
+                        <span class="meta-label">Resultados</span>
+                        <span class="meta-value">6</span>
+                    </div>
+
+                </div>
+
+                <p class="quiz-desc">
+                    Cada resposta revela traços da sua visão filosófica — do absurdo de Camus à fenomenologia de Merleau-Ponty.
+                    Não há certo ou errado, apenas perspectivas diferentes sobre a existência.
+                </p>
+
+                <button class="btn-quiz-1" onclick="iniciarQuiz()">
+                    Descobrir agora
+                </button>
+
+            </div>
 
         </div>
+
     </div>
+
+    <div id="jogo" style="display: none;">
+
+        <div id="infoQuestao">
+            <span>
+                Questão
+                <span id="spanNumeroDaQuestaoAtual"></span>
+                de
+                <span id="qtdQuestoes"></span>
+            </span>
+        </div>
+
+        <div id="perguntaDaQuestaoAtual">
+            <span id="spanQuestaoExibida"></span>
+        </div>
+
+        <div id="opcoes">
+
+            <span>
+                <input type="radio" id="primeiraOpcao" name="option" value="alternativaA" />
+                <label for="primeiraOpcao" id="labelOpcaoUm"></label>
+            </span>
+
+            <span>
+                <input type="radio" id="segundaOpcao" name="option" value="alternativaB" />
+                <label for="segundaOpcao" id="labelOpcaoDois"></label>
+            </span>
+
+            <span>
+                <input type="radio" id="terceiraOpcao" name="option" value="alternativaC" />
+                <label for="terceiraOpcao" id="labelOpcaoTres"></label>
+            </span>
+
+            <span>
+                <input type="radio" id="quartaOpcao" name="option" value="alternativaD" />
+                <label for="quartaOpcao" id="labelOpcaoQuatro"></label>
+            </span>
+
+            <span>
+                <input type="radio" id="quintaOpcao" name="option" value="alternativaE" />
+                <label for="quintaOpcao" id="labelOpcaoCinco"></label>
+            </span>
+
+            <span>
+                <input type="radio" id="sextaOpcao" name="option" value="alternativaF" />
+                <label for="sextaOpcao" id="labelOpcaoSeis"></label>
+            </span>
+
+        </div>
+
+        <div id="botoes">
+
+            <button onclick="submeter()" id="btnSubmeter">
+                Submeter resposta
+            </button>
+
+            <div id="msgFinal"
+                style="display: none; margin-top: 20px; padding: 15px; border-radius: 12px; text-align: center; color: #fff;">
+            </div>
+
+            <button onclick="tentarNovamente()" id="btnTentarNovamente"
+                disabled
+                style="display: none; ">
+                Reiniciar Quiz
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
 
     <div id="philosopher-modal" class="modal">
         <div class="modal-content">
@@ -290,6 +340,7 @@
 
         document.getElementById("spanNumeroDaQuestaoAtual").innerHTML = index + 1;
 
+
         document.getElementById("spanQuestaoExibida").innerHTML = q.enunciado;
 
         const alts = alternativasPorQuestao[q.id];
@@ -445,77 +496,9 @@
         window.location.reload();
     }
 
-    const filosofiasData = {
-        absurdo: {
-            nome: "Filosofia do Absurdo",
-            filosofo: "Albert Camus",
-            img: "https://s2.glbimg.com/wvxiZOXiulrBZ9C3g9_5DC4L5vn6_Sk37jkdObBh1c93PXY87DJvt65jTnO5_asp/e.glbimg.com/og/ed/f/original/2013/11/01/806_mestres1.jpg",
-            desc: "O absurdo surge do confronto entre a busca humana por significado e o silêncio irracional do universo. Para Camus, não devemos fugir dessa realidade através de falsas esperanças, mas abraçá-la com revolta, liberdade e paixão, imaginando Sísifo feliz."
-        },
-        liberdade: {
-            nome: "Liberdade Radical",
-            filosofo: "Jean-Paul Sartre",
-            img: "https://upload.wikimedia.org/wikipedia/commons/e/ef/Sartre_1967_crop.jpg",
-            desc: "A existência precede a essência. Não nascemos com um propósito pré-definido; somos nós que criamos nosso próprio significado através de nossas escolhas. Estamos 'condenados a ser livres', e essa liberdade absoluta traz consigo a angústia da responsabilidade total."
-        },
-        fe: {
-            nome: "Fé e Angústia",
-            filosofo: "Søren Kierkegaard",
-            img: "https://advocatetanmoy.com/wp-content/uploads/2023/05/Soren-Kierkegaard.jpg",
-            desc: "A angústia é a vertigem da liberdade, o momento em que percebemos o peso das nossas escolhas. Para Kierkegaard, o salto de fé é a única forma de transcender o desespero existencial, um ato puramente subjetivo e individual, sem garantias racionais."
-        },
-        niilismo: {
-            nome: "Niilismo",
-            filosofo: "Friedrich Nietzsche",
-            img: "https://upload.wikimedia.org/wikipedia/commons/1/1b/Nietzsche187a.jpg",
-            desc: "A desvalorização dos valores supremos e a percepção de que a vida não possui um sentido intrínseco. Nietzsche propõe que, ao invés de cair no desespero, devemos assumir a postura do 'Übermensch' (Além-do-homem), criando nossos próprios valores e amando o destino (Amor Fati)."
-        },
-        humanista: {
-            nome: "Existencialismo Humanista",
-            filosofo: "Simone de Beauvoir",
-            img: "https://upload.wikimedia.org/wikipedia/commons/c/c1/Simone_de_Beauvoir2.png",
-            desc: "O reconhecimento de que nossa liberdade está intrinsicamente ligada à liberdade dos outros. Não somos entidades isoladas, mas seres em situação. A verdadeira ética existencialista exige que usemos nossa liberdade para lutar pela emancipação e libertação coletiva."
-        },
-        fenomenologico: {
-            nome: "Exist. Fenomenológico",
-            filosofo: "Maurice Merleau-Ponty",
-            img: "https://static.ilmanifesto.it/2021/02/merleau-ponty.jpg",
-            desc: "A consciência não está separada do corpo; nós somos o nosso corpo. O mundo não é algo puramente objetivo que observamos de fora, mas algo com o qual nos entrelaçamos e percebemos ativamente através de nossa experiência corporal e sensorial."
-        }
-    };
-
-    const modal = document.getElementById("philosopher-modal");
     const closeBtn = document.querySelector(".close-btn");
-    const houses = document.querySelectorAll(".house-item");
 
-    const modalImg = document.getElementById("modal-img");
-    const modalBadge = document.getElementById("modal-badge");
-    const modalPhilosopher = document.getElementById("modal-philosopher");
-    const modalDesc = document.getElementById("modal-desc");
-
-    houses.forEach(house => {
-        house.addEventListener("click", function () {
-            const id = this.getAttribute("data-id");
-            if (id && filosofiasData[id]) {
-                const data = filosofiasData[id];
-                modalImg.src = data.img;
-                modalBadge.textContent = data.nome.toUpperCase();
-                modalPhilosopher.textContent = data.filosofo;
-                modalDesc.textContent = data.desc;
-                modal.classList.add("show");
-            }
-        });
-    });
-
-    closeBtn.addEventListener("click", () => {
-        modal.classList.remove("show");
-    });
-
-    window.addEventListener("click", (event) => {
-        if (event.target == modal) {
-            modal.classList.remove("show");
-        }
-    });
+   
 
 </script>
 </html>
