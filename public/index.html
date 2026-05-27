@@ -169,6 +169,45 @@
   </div>
 </div>
 
+<section class="persona-teatro" id="persona">
+    <div class="persona-conteudo">
+      <h1 class="persona-titulo">
+        A PERSONA E O<br>TEATRO CULTURAL.
+      </h1>
+      
+      <p class="persona-texto">
+        Embora o "eu" seja uma criação da mente, ele não é uma invenção puramente livre. Sua forma é ditada pelo coletivo. Vestimos máscaras — as personas — moldadas pelas expectativas sociais, interpretando papéis em um grandioso teatro cultural sob um roteiro que não escolhemos escrever.
+      </p>
+
+      <div class="persona-accordion-container">
+        <!-- Item 1 -->
+        <div class="accordion-row">
+          <span>E quando não conseguimos entrar no espetáculo?</span>
+          <span class="accordion-icon">+</span>
+        </div>
+        
+        <div class="accordion-content">
+          <p>
+            É aqui que entra a genialidade e a angústia de Franz Kafka. Em obras como <em>O Processo</em> e <em>O Castelo</em>, Kafka retrata magistralmente o isolamento daqueles que são mantidos de fora. 
+            <br><br>
+            Seus protagonistas não compreendem o roteiro coletivo e são barrados na entrada do grande "espetáculo" social ou burocrático. Eles tentam, em vão, acessar um sistema de regras incompreensíveis que exige sua participação, mas recusa sua entrada — a representação definitiva da alienação de quem não consegue vestir a persona exigida pelo mundo.
+          </p>
+        </div>
+
+      
+        <div class="accordion-row">
+          <span>O peso da máscara coletiva</span>
+          <span class="accordion-icon">+</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="persona-imagem">
+      
+      <img src="./assets/imgs/teatro.png" alt="Cadeiras vazias representando o teatro cultural">
+    </div>
+  </section>
+
 <section class="destaque-video" id="destaque">
   <div class="container-destaque">
     <div class="destaque-header">
@@ -309,6 +348,22 @@
       }
     });
   });
+
+  document.querySelectorAll('.accordion-row').forEach(row => {
+  row.addEventListener('click', function() {
+    // rever o this.next depois
+    const content = this.nextElementSibling;
+    const icon = this.querySelector('.accordion-icon');
+
+    content.classList.toggle('active');
+
+    if (content.classList.contains('active')) {
+      icon.textContent = '−';
+    } else {
+      icon.textContent = '+';
+    }
+  });
+});
 
   closeBtn.addEventListener("click", () => {
     modal.classList.remove("show");

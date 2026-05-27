@@ -148,7 +148,7 @@ body {
 
 .banner-frase em {
   color: #830a0a;
-  text-shadow: 0 2px 20px rgba(22, 6, 6, 0.6);
+  text-shadow: 0 2px 20px rgba(22, 6, 6, 0);
   font-style: italic;
 }
 
@@ -206,9 +206,9 @@ body {
 
 .existence-frase {
   text-align: left;
-  font-family: 'Caslon Ionic', serif;
-  font-size: 50px;
-  font-weight: 1200;
+   font-family: 'Cormorant Garamond', serif;
+  font-size: 55px;
+  font-weight: 600;
   line-height: 1.3;
   color: var(--carvao);
   margin-bottom: 33px;
@@ -257,6 +257,7 @@ body {
 }
 
 .visao-content h2 {
+   font-family: 'Cormorant Garamond', serif;
   font-size: 42px;
   font-weight: 600;
   color: var(--carvao);
@@ -265,8 +266,9 @@ body {
 }
 
 .visao-content p {
-  font-size: 18px;
-  color: var(--texto-suave);
+  font-family: 'Courier Prime', 'Courier New', monospace;
+  font-size: 16px;
+  color: var(--carvao);
   line-height: 1.90;
   max-width: 600px;
   text-align: left;
@@ -431,6 +433,127 @@ body {
   line-height: 1.8;
   margin: 10;
   text-align: justify;
+}
+
+/* =========================================
+   SEÇÃO PERSONA E TEATRO CULTURAL (KAFKA) 
+   ========================================= */
+
+.persona-teatro {
+  display: flex;
+  min-height: 80vh;
+  background-color: #FFF;
+  border-top: 1px solid var(--cinza-quente);
+}
+
+.persona-conteudo {
+  flex: 1;
+  padding: 8% 5% 8% 8%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.persona-titulo {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 70px;
+  font-weight: 600;
+  color: var(--carvao);
+  line-height: 1.1;
+  margin: 0 0 35px 0;
+  letter-spacing: -0.01em;
+}
+
+.persona-texto {
+  font-family: 'Courier Prime', 'Courier New', monospace;
+  font-size: 15px;
+  line-height: 1.6;
+  color: var(--carvao);
+  max-width: 500px;
+  margin: 0 0 60px 0;
+  text-align: justify;
+}
+
+.persona-accordion-container {
+  max-width: 500px;
+  border-top: 1px solid var(--carvao);
+}
+
+.accordion-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 18px 0;
+  border-bottom: 1px solid var(--carvao);
+  font-family: 'Courier Prime', 'Courier New', monospace;
+  font-size: 14px;
+  color: var(--carvao);
+  cursor: pointer;
+  transition: opacity 0.2s;
+}
+
+.accordion-row:hover {
+  opacity: 0.6;
+}
+
+.accordion-icon {
+  font-size: 18px;
+  font-weight: 400;
+}
+
+.accordion-content {
+  border-bottom: 1px solid var(--carvao);
+  padding: 20px 0;
+  display: none;
+}
+
+.accordion-content.active {
+  display: flex;
+  flex-direction: column; 
+  gap: 15px; 
+}
+
+.accordion-content p {
+  font-family: 'Courier Prime', 'Courier New', monospace;
+  font-size: 14px;
+  line-height: 1.7;
+  color: var(--carvao);
+  margin: 0;
+  text-align: justify;
+}
+
+.persona-imagem {
+  flex: 1;
+  position: relative;
+}
+
+.persona-imagem img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+/* Responsividade da nova seção */
+@media (max-width: 900px) {
+  .persona-teatro {
+    flex-direction: column;
+    max-width: 900px
+  }
+  
+  .persona-conteudo {
+    padding: 10% 5%;
+  }
+
+  .persona-titulo {
+    font-size: 45px;
+  }
+
+  .persona-imagem {
+    min-height: 500px;
+  }
 }
 
 .destaque-video {
