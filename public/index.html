@@ -217,10 +217,12 @@
     
     <div class="destaque-grid">
       <div class="destaque-item tall">
+        <a href="https://youtu.be/czfbY18UPqU?si=Gti22p14pEtaGFvA">
         <img src="./assets/imgs/imagem-top.jpg" alt="Filosofia">
         <div class="destaque-overlay">
           <h3>EXISTENCIALISMO<br>HOJE</h3>
         </div>
+        </a>
       </div>
 
       <div class="destaque-item small">
@@ -374,6 +376,46 @@
       modal.classList.remove("show");
     }
   });
+
+  function atualizarCardsIndex() {
+    fetch("/dashboard/perfis", { cache: "no-store" })
+      .then(function(response) {
+        if (response.ok) {
+          response.json().then(function(resposta) {
+            let totalUsuarios = 0;
+            
+            // 1. Soma o total de usuários para calcular a porcentagem
+            for (let i = 0; i < resposta.length; i++) {
+              totalUsuarios += Number(resposta[i].total);
+            }
+
+            // 2. Pega os cards da página inicial
+            let cardsHTML = document.querySelectorAll('#quiz .house-item');
+
+            // 3. Atualiza os valores
+            for (let i = 0; i < resposta.length; i++) {
+              let registro = resposta[i];
+              let porcentagem = (registro.total / totalUsuarios) * 100;
+
+              cardsHTML.forEach(function(card) {
+                let nomeNoCard = card.querySelector('.house-name').innerText;
+                
+                // Se o nome no HTML bater com o nome no Banco, atualiza o %
+                if (nomeNoCard.trim() === registro.nome.trim()) {
+                  card.querySelector('.house-pct').innerHTML = porcentagem.toFixed(0) + '%';
+                }
+              });
+            }
+          });
+        } else {
+          console.error("Nenhum dado encontrado ou erro na API");
+        }
+      })
+      .catch(function(erro) {
+        console.error("Erro ao buscar dados dos perfis: ", erro);
+      });
+  }
+  window.addEventListener('load', atualizarCardsIndex);
 </script>
 
 </html>

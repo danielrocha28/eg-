@@ -119,15 +119,14 @@ function obterDadosGrafico() {
         labels: labels,
         datasets: [{
             label: "Porcentagem de Usuários (%)",
-            data: [], // Os dados vão entrar aqui pelo loop abaixo
+            data: [], 
             
-            // Cores ajustadas para o estilo "Teia" (Radar)
-            borderColor: 'white', // Rosa Neon sólido
+            borderColor: 'white', 
             borderWidth: 3,
-            backgroundColor: 'rgba(230, 0, 92, 0.2)', // Rosa transparente no meio
+            backgroundColor: 'rgba(230, 0, 92, 0.2)', 
             
             // Estilo dos "pontos" em cada extremidade
-            pointBackgroundColor: 'rgba(34, 193, 195, 1)', // Ciano
+            pointBackgroundColor: 'rgba(34, 193, 195, 1)',
             pointBorderColor: '#fff',
             pointHoverBackgroundColor: '#fff',
             pointHoverBorderColor: 'white'
@@ -161,14 +160,12 @@ function obterDadosGrafico() {
             scales: {
                 r: {
                     min: 0,
-                    suggestedMax: 50, // Mantive o suggestedMax para o gráfico ficar grande
-                    
-                    // 1. Cor das linhas circulares (a teia em si)
+                    suggestedMax: 50,
+            
                     grid: {
                         color: 'rgba(255, 255, 255, 0.15)' 
                     },
                     
-                    // 2. Cor das linhas diagonais que saem do centro
                     angleLines: {
                         color: 'rgba(255, 255, 255, 0.15)'
                     },
@@ -179,16 +176,16 @@ function obterDadosGrafico() {
                             return value + '%';
                         },
                         font: { family: "'Exo 2', sans-serif", size: 10 },
-                        backdropColor: 'transparent', // Tira o fundo quadrado dos números
+                        backdropColor: 'transparent',
                         
-                        // 3. Cor dos números das porcentagens (20%, 40%...)
+                        // Cor dos números das porcentagens (20%, 40%...)
                         color: 'rgba(255, 255, 255, 0.6)' 
                     },
 
                     pointLabels: {
                         font: { family: "'Exo 2', sans-serif", size: 13, weight: '600' },
                         
-                        // 4. Cor dos títulos nas pontas (Liberdade Radical, etc.)
+                        // Cor dos títulos nas pontas (Liberdade Radical, etc.)
                         color: '#ffffff', 
                         padding: 15
                     }

@@ -17,28 +17,28 @@
 
 <body>
 
-   <div class="login-buttons">
+  <div class="login-buttons">
     <div class="voltar">
-        <a href="index.html">
-            <svg fill="currentColor" height="22" viewBox="0 0 22 22" width="22" xmlns="http://www.w3.org/2000/svg">
-                <rect class="seta-traco" height="2" width="0" x="7" y="10"></rect>
-                <path d="M15.75 4H13L6 11L13 18H15.75L8.75 11L15.75 4Z"></path>
-            </svg>
-            <span>VOLTAR</span>
-        </a>
+      <a href="index.html">
+        <svg fill="currentColor" height="22" viewBox="0 0 22 22" width="22" xmlns="http://www.w3.org/2000/svg">
+          <rect class="seta-traco" height="2" width="0" x="7" y="10"></rect>
+          <path d="M15.75 4H13L6 11L13 18H15.75L8.75 11L15.75 4Z"></path>
+        </svg>
+        <span>VOLTAR</span>
+      </a>
     </div>
 
     <div class="cadastro">
-        <a href="login.html">
-            <span class="cadastro-inner">
-                <span class="cadastro-texto">FAZER LOGIN</span>
-                <span class="cadastro-linha-wrapper">
-                    <div class="cadastro-linha"></div>
-                </span>
-            </span>
-        </a>
+      <a href="login.html">
+        <span class="cadastro-inner">
+          <span class="cadastro-texto">FAZER LOGIN</span>
+          <span class="cadastro-linha-wrapper">
+            <div class="cadastro-linha"></div>
+          </span>
+        </span>
+      </a>
     </div>
-</div> 
+  </div>
 
 
   <div class="login">
@@ -101,23 +101,38 @@
     emailVar = emailVar.trim();
 
     if (nomeVar == "" || emailVar == "" || senhaVar == "" || confirmacaoSenhaVar == "") {
-        exibirErro("Todos os campos são obrigatórios!");
-        return false;
+      exibirErro("Todos os campos são obrigatórios!");
+      return false;
     }
 
     if (emailVar.indexOf("@") == -1 || emailVar.indexOf(".com") == -1) {
-        exibirErro("E-mail inválido! falta @ ou .com");
-        return false;
+      exibirErro("E-mail inválido! falta @ ou .com");
+      return false;
     }
 
     if (senhaVar != confirmacaoSenhaVar) {
-        exibirErro("As senhas não coincidem!");
-        return false;
+      exibirErro("As senhas não coincidem!");
+      return false;
     }
 
-    if(senhaVar.length < 6) {
+    if (senhaVar.length < 6) {
       exibirErro("A senha não pode ser menor que 6 dígitos!");
-        return false;
+      return false;
+    }
+
+    if (!/[a-z]/.test(senhaVar)) {
+      exibirErro("A senha deve possuir pelo menos uma letra");
+      return false;
+    }
+
+    if (!/[0-9]/.test(senhaVar)) {
+      exibirErro("A senha deve possuir pelo menos um número!");
+      return false;
+    }
+
+    if (!/[A-Z]/.test(senhaVar)) {
+      exibirErro("A senha deve possuir pelo menos uma letra maiúscula!");
+      return false;
     }
 
     // Enviando o valor da nova input
@@ -163,11 +178,11 @@
 
 
   // Listando empresas cadastradas 
-function exibirErro(mensagem) {
+  function exibirErro(mensagem) {
     cardErro.style.display = "block";
     mensagem_erro.innerHTML = mensagem;
     setTimeout(sumirMensagem, 3000); // Oculta automaticamente após 3 segundos
-}
+  }
 
   function sumirMensagem() {
     cardErro.style.display = "none";
