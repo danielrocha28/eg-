@@ -6,227 +6,197 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ego | Dashboard </title>
+    <title>Egó | Dashboard</title>
 
-    
     <link rel="stylesheet" href="./../css/dashboards.css">
     <link rel="stylesheet" href="./../css/estilo.css" />
     <script src="../js/sessao.js"></script>
     <script src="./../js/alerta.js"></script>
 
-    <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link
-        href="https://fonts.googleapis.com/css2?family=Exo+2:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
-        rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Exo+2:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
-    <!-- scripts do Chart.js - 2022-1 -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-
-    <!--FONT AWESOME-->
-    <script src="https://kit.fontawesome.com/9f7414eb10.js" crossorigin="anonymous"></script>
 </head>
 
 <body>
 
     <div class="janela">
-        <div class="header-left">
-          
-            <h1><a href="../index.html" class="card-logo"><img src="../assets/imgs/logo-branca.png" alt=""></a></h1>
+
+        <!-- ── SIDEBAR ── -->
+        <aside class="header-left">
+
+            <a href="../index.html" class="card-logo">
+                <img src="../assets/imgs/logo-branca.png" alt="Egó">
+            </a>
 
             <div class="hello">
                 <h3>Olá, <span id="b_usuario">usuário</span>!</h3>
             </div>
 
-            <div class="btn-nav-white">
-                <a href="./cards.html">
-                    <h3>Quizzes</h3>
-                </a>
-            </div>
+            <nav class="sidebar-nav">
 
-            <div class="btn-nav">
-                <h3>Gráficos</h3>
-            </div>
+                <div class="btn-nav-white">
+                    <a href="./cards.html">
+                        <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M9 5H7a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-2M9 5a2 2 0 0 0 2 2h2a2 2 0 0 0 2-2"/></svg>
+                        <h3>Quizzes</h3>
+                    </a>
+                </div>
 
-            <div class="btn-nav-white">
-                <a href="./mural.html">
-                    <h3>Mural de Avisos</h3>
-                </a>
-            </div>
+                <div class="btn-nav">
+                    <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="9" rx="1"/><rect x="14" y="3" width="7" height="5" rx="1"/><rect x="14" y="12" width="7" height="9" rx="1"/><rect x="3" y="16" width="7" height="5" rx="1"/></svg>
+                    <h3>Gráficos</h3>
+                </div>
+
+                <div class="btn-nav-white">
+                    <a href="./mural.html">
+                        <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M15 17h5l-1.405-1.405A2.032 2.032 0 0 1 18 14.158V11a6.002 6.002 0 0 0-4-5.659V5a2 2 0 1 0-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 1 1-6 0v-1m6 0H9"/></svg>
+                        <h3>Mural de Avisos</h3>
+                    </a>
+                </div>
+
+            </nav>
 
             <div class="btn-logout" onclick="limparSessao()">
                 <h3>Sair</h3>
             </div>
 
-        </div>
+        </aside>
 
-        <div class="dash">
-            <div id="alerta">
-        </div>
+        <!-- ── CONTEÚDO ── -->
+        <main class="dash">
 
-            <div id="graficos">
+            <div class="dash-page-header">
+                <div>
+                    <h2>Gráficos</h2>
+                    <p class="dash-breadcrumb">Dashboard &rsaquo; <span>Gráficos</span></p>
+                </div>
             </div>
-        </div>
+
+            <div id="alerta"></div>
+
+            <div id="graficos"></div>
+
+        </main>
+
     </div>
 
 </body>
 
-</html>
-
 <script>
-   
-   b_usuario.innerHTML = sessionStorage.NOME_USUARIO;
-    window.onload = function () {
 
     b_usuario.innerHTML = sessionStorage.NOME_USUARIO;
 
-    carregarGrafico();
-}
-
-function obterDadosGrafico() {
-
-    fetch("/dashboard/perfis", { cache: "no-store" })
-
-        .then(function(response) {
-
-            if (response.ok) {
-
-                response.json().then(function(resposta) {
-
-                    console.log(resposta);
-
-                    plotarGrafico(resposta);
-
-                });
-
-            } else {
-
-                console.error("Erro ao buscar dados");
-
-            }
-        })
-
-        .catch(function(erro) {
-
-            console.error(erro);
-
-        });
-}
-
- function plotarGrafico(resposta) {
-    let labels = [];
-
-    let dados = {
-        labels: labels,
-        datasets: [{
-            label: "Porcentagem de Usuários (%)",
-            data: [], 
-            
-            borderColor: 'white', 
-            borderWidth: 3,
-            backgroundColor: 'rgba(230, 0, 92, 0.2)', 
-            
-            // Estilo dos "pontos" em cada extremidade
-            pointBackgroundColor: 'rgba(34, 193, 195, 1)',
-            pointBorderColor: '#fff',
-            pointHoverBackgroundColor: '#fff',
-            pointHoverBorderColor: 'white'
-        }]
-    };
-
-    let totalUsuarios = 0;
-    for (let i = 0; i < resposta.length; i++) {
-        totalUsuarios += Number(resposta[i].total);
+    window.onload = function() {
+        b_usuario.innerHTML = sessionStorage.NOME_USUARIO;
+        carregarGrafico();
     }
 
-    for (let i = 0; i < resposta.length; i++) {
-        let registro = resposta[i];
-        labels.push(registro.nome);
-        
-        let porcentagem = (registro.total / totalUsuarios) * 100;
-        
-        dados.datasets[0].data.push(porcentagem.toFixed(1)); 
-    }
-
-
-   const config = {
-        type: "radar",
-        data: dados,
-        options: {
-            responsive: true,
-            maintainAspectRatio: false,
-            layout: {
-                padding: 10
-            },
-            scales: {
-                r: {
-                    min: 0,
-                    suggestedMax: 50,
-            
-                    grid: {
-                        color: 'rgba(255, 255, 255, 0.15)' 
-                    },
-                    
-                    angleLines: {
-                        color: 'rgba(255, 255, 255, 0.15)'
-                    },
-
-                    ticks: {
-                        stepSize: 20,
-                        callback: function(value) {
-                            return value + '%';
-                        },
-                        font: { family: "'Exo 2', sans-serif", size: 10 },
-                        backdropColor: 'transparent',
-                        
-                        // Cor dos números das porcentagens (20%, 40%...)
-                        color: 'rgba(255, 255, 255, 0.6)' 
-                    },
-
-                    pointLabels: {
-                        font: { family: "'Exo 2', sans-serif", size: 13, weight: '600' },
-                        
-                        // Cor dos títulos nas pontas (Liberdade Radical, etc.)
-                        color: '#ffffff', 
-                        padding: 15
-                    }
+    function obterDadosGrafico() {
+        fetch("/dashboard/perfis", { cache: "no-store" })
+            .then(function(response) {
+                if (response.ok) {
+                    response.json().then(function(resposta) {
+                        console.log(resposta);
+                        plotarGrafico(resposta);
+                    });
+                } else {
+                    console.error("Erro ao buscar dados");
                 }
-            },
-            plugins: {
-                legend: {
-                    display: false 
+            })
+            .catch(function(erro) {
+                console.error(erro);
+            });
+    }
+
+    function plotarGrafico(resposta) {
+        let labels = [];
+
+        let dados = {
+            labels: labels,
+            datasets: [{
+                label: "Porcentagem de Usuários (%)",
+                data: [],
+                borderColor: '#e6005a',
+                borderWidth: 3,
+                backgroundColor: 'rgba(230, 0, 90, 0.15)',
+                pointBackgroundColor: '#32b9cd',
+                pointBorderColor: '#fff',
+                pointHoverBackgroundColor: '#fff',
+                pointHoverBorderColor: '#32b9cd'
+            }]
+        };
+
+        let totalUsuarios = 0;
+        for (let i = 0; i < resposta.length; i++) {
+            totalUsuarios += Number(resposta[i].total);
+        }
+
+        for (let i = 0; i < resposta.length; i++) {
+            let registro = resposta[i];
+            labels.push(registro.nome);
+            let porcentagem = (registro.total / totalUsuarios) * 100;
+            dados.datasets[0].data.push(porcentagem.toFixed(1));
+        }
+
+        const config = {
+            type: "radar",
+            data: dados,
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                layout: { padding: 10 },
+                scales: {
+                    r: {
+                        min: 0,
+                        suggestedMax: 50,
+                        grid:       { color: '#D1D5DB' },
+                        angleLines: { color: '#D1D5DB' },
+                        ticks: {
+                            stepSize: 20,
+                            callback: function(value) { return value + '%'; },
+                            font: { family: "'Exo 2', sans-serif", size: 10 },
+                            backdropColor: 'transparent',
+                            color: '#6B7280'
+                        },
+                        pointLabels: {
+                            font: { family: "'Exo 2', sans-serif", size: 13, weight: '600' },
+                            color: '#1a1a1a',
+                            padding: 15
+                        }
+                    }
                 },
-                tooltip: {
-                    callbacks: {
-                        label: function(context) {
-                            return context.raw + '% dos usuários';
+                plugins: {
+                    legend: { display: false },
+                    tooltip: {
+                        callbacks: {
+                            label: function(context) {
+                                return context.raw + '% dos usuários';
+                            }
                         }
                     }
                 }
             }
-        }
-    };
+        };
 
-    new Chart(
-        document.getElementById("myChartCanvas"),
-        config
-    );
-}
+        new Chart(document.getElementById("myChartCanvas"), config);
+    }
 
-function carregarGrafico() {
-    document.getElementById("graficos").innerHTML = `
-        <div id="graficoPerfis" style="width: 100%; max-width: 900px; display: flex; flex-direction: column; align-items: center; color: white">
-            
-            <h3 class="tituloGraficos" style="color: var(--text-main); margin-bottom: 20px; font-family: 'Exo 2', sans-serif;">
-                Distribuição dos Perfis Filosóficos
-            </h3>
-
-            <div class="grafico-container">
-                <canvas id="myChartCanvas"></canvas>
+    function carregarGrafico() {
+        document.getElementById("graficos").innerHTML = `
+            <div id="graficoPerfis" style="width:100%; max-width:900px; display:flex; flex-direction:column; align-items:center;">
+                <h3 style="color:#1a1a1a; margin-bottom:20px; font-family:'Exo 2',sans-serif; font-size:18px; font-weight:600;">
+                    Distribuição dos Perfis Filosóficos
+                </h3>
+                <div class="grafico-container">
+                    <canvas id="myChartCanvas"></canvas>
+                </div>
             </div>
+        `;
+        obterDadosGrafico();
+    }
 
-        </div>
-    `;
-
-    obterDadosGrafico();
-}
 </script>
+
+</html>

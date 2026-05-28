@@ -13,177 +13,193 @@
 
     <script src="../js/sessao.js"></script>
     <script src="../js/alerta.js"></script>
-    <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css2?family=Exo+2:ital,wght@0,100..900;1,100..900&display=swap"
-        rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Exo+2:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 </head>
 
 <body onload="validarSessao(), atualizacaoPeriodica(), onloadEsconder()">
 
     <div class="janela">
 
-        <div class="header-left dash-header">
-            <h1><a href="../index.html" class="card-logo"><img src="../assets/imgs/logo-branca.png" alt=""></a></h1>
+        <!-- ── SIDEBAR ── -->
+        <aside class="header-left dash-header">
+
+            <a href="../index.html" class="card-logo">
+                <img src="../assets/imgs/logo-branca.png" alt="Egó">
+            </a>
+
             <div class="hello">
                 <h3>Olá, <span id="b_usuario">usuário</span>!</h3>
             </div>
-            <div class="btn-nav">
-                <h3>Quizzes</h3>
-            </div>
-            <div class="btn-nav-white">
-                <a href="./dashboard.html">
-                    <h3>Gráficos</h3>
-                </a>
-            </div>
-            <div class="btn-nav-white">
-                <a href="./mural.html">
-                    <h3>Mural de Avisos</h3>
-                </a>
-            </div>
+
+            <nav class="sidebar-nav">
+
+                <div class="btn-nav">
+                    <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M9 5H7a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-2M9 5a2 2 0 0 0 2 2h2a2 2 0 0 0 2-2M9 5a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2"/></svg>
+                    <h3>Quizzes</h3>
+                </div>
+
+                <div class="btn-nav-white">
+                    <a href="./dashboard.html">
+                        <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="9" rx="1"/><rect x="14" y="3" width="7" height="5" rx="1"/><rect x="14" y="12" width="7" height="9" rx="1"/><rect x="3" y="16" width="7" height="5" rx="1"/></svg>
+                        <h3>Gráficos</h3>
+                    </a>
+                </div>
+
+                <div class="btn-nav-white">
+                    <a href="./mural.html">
+                        <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M15 17h5l-1.405-1.405A2.032 2.032 0 0 1 18 14.158V11a6.002 6.002 0 0 0-4-5.659V5a2 2 0 1 0-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 1 1-6 0v-1m6 0H9"/></svg>
+                        <h3>Mural de Avisos</h3>
+                    </a>
+                </div>
+
+            </nav>
+
             <div class="btn-logout" onclick="limparSessao()">
                 <h3>Sair</h3>
             </div>
-        </div>
 
-        <div class="dash">
+        </aside>
 
+        <!-- ── CONTENT ── -->
+        <main class="dash">
+
+            <!-- Page header -->
+            <div class="dash-page-header">
+                <div>
+                    <h2>Quizzes</h2>
+                    <p class="dash-breadcrumb">Dashboard &rsaquo; <span>Quizzes</span></p>
+                </div>
+            </div>
+
+            <!-- Stats -->
+            <div class="stats-row">
+                <div class="stat-card">
+                    <div class="stat-icon pink">
+                        <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M9 5H7a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-2M9 5a2 2 0 0 0 2 2h2a2 2 0 0 0 2-2"/></svg>
+                    </div>
+                    <div class="stat-info">
+                        <p>Questões</p>
+                        <h3>10</h3>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon cyan">
+                        <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+                    </div>
+                    <div class="stat-info">
+                        <p>Tempo Est.</p>
+                        <h3>~10 min</h3>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon amber">
+                        <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                    </div>
+                    <div class="stat-info">
+                        <p>Resultados</p>
+                        <h3>6</h3>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Quiz section -->
             <div id="pontuacaoEJogo" class="quiz">
 
-    <div id="telaInicial">
+                <!-- Tela inicial -->
+                <div id="telaInicial">
+                    <div class="quiz-intro-card">
 
-        <div class="quiz-intro-card">
+                        <div class="quiz-card-header">
+                            <div class="quiz-card-badges">
+                                <span class="quiz-pill pill-type">Filosofia</span>
+                                <span class="quiz-pill pill-count">10 questões</span>
+                            </div>
+                            <h2>Qual consciência filosófica habita sua existência?</h2>
+                            <p>Descubra qual corrente do existencialismo mais ressoa com sua forma de ver o mundo.</p>
+                            <div class="quiz-symbols">
+                                <div class="sym" style="background:#7F77DD22;color:#AFA9EC;">∅</div>
+                                <div class="sym" style="background:#e6005a22;color:#F4C0D1;">∞</div>
+                                <div class="sym" style="background:#1D9E7522;color:#5DCAA5;">✝</div>
+                                <div class="sym" style="background:rgba(255,255,255,.06);color:rgba(255,255,255,.4);border-color:rgba(255,255,255,.15);">⊘</div>
+                                <div class="sym" style="background:#32b9cd22;color:#85B7EB;">◎</div>
+                                <div class="sym" style="background:#BA751722;color:#EF9F27;">◈</div>
+                            </div>
+                        </div>
 
-            <div class="quiz-card-header">
+                        <div class="quiz-card-body">
+                            <div class="quiz-meta">
+                                <div class="meta-item">
+                                    <span class="meta-label">Perguntas</span>
+                                    <span class="meta-value">10</span>
+                                </div>
+                                <div class="meta-item">
+                                    <span class="meta-label">Tempo est.</span>
+                                    <span class="meta-value">10 min</span>
+                                </div>
+                                <div class="meta-item">
+                                    <span class="meta-label">Resultados</span>
+                                    <span class="meta-value">6</span>
+                                </div>
+                            </div>
+                            <p class="quiz-desc">
+                                Cada resposta revela traços da sua visão filosófica — do absurdo de Camus à fenomenologia de Merleau-Ponty.
+                                Não há certo ou errado, apenas perspectivas diferentes sobre a existência.
+                            </p>
+                            <button class="btn-quiz-1" onclick="iniciarQuiz()">Descobrir agora</button>
+                        </div>
 
-                <div class="quiz-card-badges">
-                    <span class="quiz-pill pill-type">Filosofia</span>
-                    <span class="quiz-pill pill-count">10 questões</span>
+                    </div>
                 </div>
 
-                <h2>Qual consciência filosófica habita sua existência?</h2>
+                <!-- Jogo -->
+                <div id="jogo" style="display:none;">
 
-                <p>
-                    Descubra qual corrente do existencialismo mais ressoa com sua forma de ver o mundo.
-                </p>
+                    <div class="voltar-quiz">
+                        <a href="javascript:void(0)" onclick="abandonarQuiz()">
+                            <svg fill="currentColor" height="18" viewBox="0 0 22 22" width="18" xmlns="http://www.w3.org/2000/svg">
+                                <rect class="seta-traco-dash" height="2" width="0" x="7" y="10"></rect>
+                                <path d="M15.75 4H13L6 11L13 18H15.75L8.75 11L15.75 4Z"></path>
+                            </svg>
+                            <span>Voltar</span>
+                        </a>
+                    </div>
 
-                <div class="quiz-symbols">
-                    <div class="sym" style="background:#7F77DD22; color:#AFA9EC;">∅</div>
-                    <div class="sym" style="background:#e6005a22; color:#F4C0D1;">∞</div>
-                    <div class="sym" style="background:#1D9E7522; color:#5DCAA5;">✝</div>
-                    <div class="sym" style="background:#2C2C2A; color:rgba(255,255,255,0.4); border-color:rgba(255,255,255,0.15);">⊘</div>
-                    <div class="sym" style="background:#32b9cd22; color:#85B7EB;">◎</div>
-                    <div class="sym" style="background:#BA751722; color:#EF9F27;">◈</div>
+                    <div id="infoQuestao">
+                        <span>
+                            Questão <span id="spanNumeroDaQuestaoAtual"></span> de <span id="qtdQuestoes"></span>
+                        </span>
+                    </div>
+
+                    <div id="perguntaDaQuestaoAtual">
+                        <span id="spanQuestaoExibida"></span>
+                    </div>
+
+                    <div id="opcoes">
+                        <span><input type="radio" id="primeiraOpcao" name="option" value="alternativaA" /><label for="primeiraOpcao" id="labelOpcaoUm"></label></span>
+                        <span><input type="radio" id="segundaOpcao" name="option" value="alternativaB" /><label for="segundaOpcao" id="labelOpcaoDois"></label></span>
+                        <span><input type="radio" id="terceiraOpcao" name="option" value="alternativaC" /><label for="terceiraOpcao" id="labelOpcaoTres"></label></span>
+                        <span><input type="radio" id="quartaOpcao" name="option" value="alternativaD" /><label for="quartaOpcao" id="labelOpcaoQuatro"></label></span>
+                        <span><input type="radio" id="quintaOpcao" name="option" value="alternativaE" /><label for="quintaOpcao" id="labelOpcaoCinco"></label></span>
+                        <span><input type="radio" id="sextaOpcao" name="option" value="alternativaF" /><label for="sextaOpcao" id="labelOpcaoSeis"></label></span>
+                    </div>
+
+                    <div id="botoes" class="quiz-botoes-container">
+                        <button onclick="submeter()" id="btnSubmeter">Submeter resposta</button>
+                        <div id="msgFinal" style="display:none;"></div>
+                        <button onclick="tentarNovamente()" id="btnTentarNovamente" disabled style="display:none;">Reiniciar Quiz</button>
+                    </div>
+
                 </div>
 
             </div>
 
-            <div class="quiz-card-body">
-
-                <div class="quiz-meta">
-
-                    <div class="meta-item">
-                        <span class="meta-label">Perguntas</span>
-                        <span class="meta-value">10</span>
-                    </div>
-
-                    <div class="meta-item">
-                        <span class="meta-label">Tempo est.</span>
-                        <span class="meta-value">10 min</span>
-                    </div>
-
-                    <div class="meta-item">
-                        <span class="meta-label">Resultados</span>
-                        <span class="meta-value">6</span>
-                    </div>
-
-                </div>
-
-                <p class="quiz-desc">
-                    Cada resposta revela traços da sua visão filosófica — do absurdo de Camus à fenomenologia de Merleau-Ponty.
-                    Não há certo ou errado, apenas perspectivas diferentes sobre a existência.
-                </p>
-
-                <button class="btn-quiz-1" onclick="iniciarQuiz()">
-                    Descobrir agora
-                </button>
-
-            </div>
-
-        </div>
+        </main>
 
     </div>
 
-    <div id="jogo" style="display: none;">
-
-        <div id="infoQuestao">
-            <span>
-                Questão
-                <span id="spanNumeroDaQuestaoAtual"></span>
-                de
-                <span id="qtdQuestoes"></span>
-            </span>
-        </div>
-
-        <div id="perguntaDaQuestaoAtual">
-            <span id="spanQuestaoExibida"></span>
-        </div>
-
-        <div id="opcoes">
-
-            <span>
-                <input type="radio" id="primeiraOpcao" name="option" value="alternativaA" />
-                <label for="primeiraOpcao" id="labelOpcaoUm"></label>
-            </span>
-
-            <span>
-                <input type="radio" id="segundaOpcao" name="option" value="alternativaB" />
-                <label for="segundaOpcao" id="labelOpcaoDois"></label>
-            </span>
-
-            <span>
-                <input type="radio" id="terceiraOpcao" name="option" value="alternativaC" />
-                <label for="terceiraOpcao" id="labelOpcaoTres"></label>
-            </span>
-
-            <span>
-                <input type="radio" id="quartaOpcao" name="option" value="alternativaD" />
-                <label for="quartaOpcao" id="labelOpcaoQuatro"></label>
-            </span>
-
-            <span>
-                <input type="radio" id="quintaOpcao" name="option" value="alternativaE" />
-                <label for="quintaOpcao" id="labelOpcaoCinco"></label>
-            </span>
-
-            <span>
-                <input type="radio" id="sextaOpcao" name="option" value="alternativaF" />
-                <label for="sextaOpcao" id="labelOpcaoSeis"></label>
-            </span>
-
-        </div>
-
-        <div id="botoes">
-
-            <button onclick="submeter()" id="btnSubmeter">
-                Submeter resposta
-            </button>
-
-            <div id="msgFinal"
-                style="display: none; margin-top: 20px; padding: 15px; border-radius: 12px; text-align: center; color: #fff;">
-            </div>
-
-            <button onclick="tentarNovamente()" id="btnTentarNovamente"
-                disabled
-                style="display: none; ">
-                Reiniciar Quiz
-            </button>
-
-        </div>
-
-    </div>
-
-</div>
-
+    <!-- Modal -->
     <div id="philosopher-modal" class="modal">
         <div class="modal-content">
             <span class="close-btn">&times;</span>
@@ -192,159 +208,57 @@
                     <img id="modal-img" src="" alt="Foto do Filósofo">
                 </div>
                 <div class="modal-text">
-                    <span id="modal-badge" class="quiz-badge" style="position:relative; transform:none; left:0; display:inline-block; margin-bottom:10px;"></span>
+                    <span id="modal-badge" class="quiz-badge" style="position:relative;transform:none;left:0;display:inline-block;margin-bottom:10px;"></span>
                     <h2 id="modal-philosopher"></h2>
                     <p id="modal-desc"></p>
                 </div>
             </div>
         </div>
     </div>
-</body>
 
 <script>
-
     let listaDeQuestoes = [];
     let numeroDaQuestaoAtual = 0;
     let quantidadeDeQuestoes = 0;
 
     const alternativasPorQuestao = {
-       1: [
-        "Aceitar o sem-sentido da vida e viver com rebeldia e paixão apesar dele.",
-        "Uma responsabilidade total e inevitável; estamos condenados a escolher a cada instante.",
-        "Um salto no escuro; uma escolha profunda diante do mistério que exige coragem e fé.",
-        "Uma ilusão completa, já que nada importa e não há propósito real no universo.",
-        "A capacidade de agir no mundo assumindo um compromisso ético e solidário com os outros.",
-        "A abertura da nossa consciência para perceber o mundo livre de preconceitos, vivendo o presente."
-    ],
-    2: [
-        "Um confronto constante entre nosso desejo de sentido e o silêncio indiferente do universo.",
-        "Um projeto em aberto que definimos passo a passo através de nossas escolhas.",
-        "Uma jornada repleta de paradoxos, angústias e a busca por uma verdade interior profunda.",
-        "Um piscar de olhos biológico sem qualquer valor, significado ou destino final.",
-        "Uma construção humana coletiva que ganha valor real quando nos importamos com o próximo.",
-        "Um fluxo contínuo de experiências, sensações e percepções através do nosso corpo no mundo."
-    ],
-    3: [
-        "Escolhe de forma autônoma e encara a situação com ironia, sem esperar respostas do universo.",
-        "Decide sabendo que a responsabilidade é 100% minha e que não posso dar desculpas pelas consequências.",
-        "Olha para dentro de si, abraça a incerteza e dá um salto de fé naquilo que sua intuição dita.",
-        "Escolhe qualquer caminho ou deixa o acaso decidir, pois no fim das contas o resultado dá na mesma.",
-        "Pensa em como essa decisão impacta as pessoas ao meu redor e a sociedade em que vivo.",
-        "Observa como essa situação se manifesta na minha mente e sinto a experiência presente antes de agir."
-    ],
-    4: [
-        "Companheiros de viagem que compartilham a mesma estranheza e o mesmo tédio de existir.",
-        "Aqueles que testam minha autenticidade e me lembram que sou livre para me definir.",
-        "Indivíduos únicos que também enfrentam o dilema solitário da própria alma perante o absoluto.",
-        "Distrações passageiras ou estruturas sociais vazias que tentam ditar regras irrelevantes.",
-        "O espelho da minha própria humanidade; existo para e com os outros em busca de um mundo melhor.",
-        "Seres com quem divido o espaço e o tempo, percebidos através da minha vivência e empatia imediata."
-    ],
-    5: [
-        "Aceitar o absurdo da vida e viver intensamente, esgotando todas as possibilidades com rebeldia.",
-        "Inventar nosso próprio sentido com total autonomia, assumindo a autoria de nossa história.",
-        "Buscar um significado transcendental e subjetivo que vá além da lógica fria do mundo.",
-        "Aceitar o vazio absoluto e parar de tentar criar propósitos artificiais para nos enganar.",
-        "Dedicar nossa existência a construir um sentido coletivo baseado na dignidade e no bem comum.",
-        "Focar em descrever e vivenciar o mundo exatamente como ele se apresenta à nossa percepção."
-    ],
-    6: [
-        "A minha persistência em continuar vivendo e criando mesmo sabendo do caos do mundo.",
-        "A soma das minhas escolhas e atos práticos. Eu sou o que eu faço.",
-        "A minha relação íntima e sincera com minhas crenças mais profundas e minhas crises internas.",
-        "Nada. A identidade é apenas uma ilusão linguística e social; não somos nada fixo.",
-        "A minha postura ética e a maneira como contribuo para a emancipação da humanidade.",
-        "A forma como minha consciência habita meu corpo e percebe o tempo, o espaço e as sensações."
-    ],
-    7: [
-        "Encaro como parte do jogo, enfrentando-o sem choramingar ou criar falsas esperanças.",
-        "Assumo o sofrimento como consequência direta das minhas escolhas ou da própria condição livre.",
-        "Enxergo o sofrimento como um momento crucial que purifica a alma e nos aproxima do essencial.",
-        "Vejo como um fato biológico inevitável e desprovido de qualquer propósito oculto ou lição.",
-        "Tento transformá-lo em empatia para lutar contra as injustices que causam dor ao meu semelhante.",
-        "Procuro acolher a dor na minha consciência, observando como ela afeta minha percepção do momento."
-    ],
-    8: [
-        "É o fim trágico que torna a vida uma piada, mas que me dá o direito de viver sem amarras.",
-        "É o limite final que me lembra que o tempo está correndo e preciso escolher com urgência agora.",
-        "O mistério final que desafia a razão e nos força a refletir sobre o valor eterno da nossa alma.",
-        "O apagão definitivo que prova que nenhuma ambição, glória ou dor humana importou de verdade.",
-        "O encerramento do meu ciclo, deixando meu legado nas memórias e vidas das pessoas que ajudei.",
-        "O momento em que minha percepção do mundo cessa; até lá, foco em vivenciar o presente ao máximo."
-    ],
-    9: [
-        "Uma busca inútil por respostas onde só há silêncio, então a única verdade é aceitar o caos.",
-        "Algo que eu mesmo defino e valido através do meu compromisso com a minha própria coerência.",
-        "Algo subjetivo e paradoxal, que só pode ser sentido e vivido na intimidade da alma.",
-        "Uma mentira reconfortante que a humanidade inventou para não pirar diante do vazio.",
-        "Um valor ético focado na emancipação humana e na justiça social para todos.",
-        "A experiência direta de como as coisas se mostram para mim no aqui e no agora."
-    ],
-    10: [
-        "A própria luta para chegar ao topo basta para encher o coração de um homem. É preciso imaginar Sísifo feliz.",
-        "O homem está condenado a ser livre; porque, uma vez lançado ao mundo, é responsável por tudo quanto fizer.",
-        "A angústia é a vertigem da liberdade, que surge quando o espírito quer pôr a síntese e olha para baixo.",
-        "Eu vos digo: é preciso ter um caos dentro de si para dar à luz uma estrela cadente.",
-        "O homem nada mais é do que aquilo que ele faz de si mesmo. Esse é o primeiro princípio do existencialismo.",
-        "Nós somos o nosso corpo; nós estamos no mundo através do nosso corpo, e o mundo é o que nós percebemos."
-    ]
+       1: ["Aceitar o sem-sentido da vida e viver com rebeldia e paixão apesar dele.","Uma responsabilidade total e inevitável; estamos condenados a escolher a cada instante.","Um salto no escuro; uma escolha profunda diante do mistério que exige coragem e fé.","Uma ilusão completa, já que nada importa e não há propósito real no universo.","A capacidade de agir no mundo assumindo um compromisso ético e solidário com os outros.","A abertura da nossa consciência para perceber o mundo livre de preconceitos, vivendo o presente."],
+       2: ["Um confronto constante entre nosso desejo de sentido e o silêncio indiferente do universo.","Um projeto em aberto que definimos passo a passo através de nossas escolhas.","Uma jornada repleta de paradoxos, angústias e a busca por uma verdade interior profunda.","Um piscar de olhos biológico sem qualquer valor, significado ou destino final.","Uma construção humana coletiva que ganha valor real quando nos importamos com o próximo.","Um fluxo contínuo de experiências, sensações e percepções através do nosso corpo no mundo."],
+       3: ["Escolhe de forma autônoma e encara a situação com ironia, sem esperar respostas do universo.","Decide sabendo que a responsabilidade é 100% minha e que não posso dar desculpas pelas consequências.","Olha para dentro de si, abraça a incerteza e dá um salto de fé naquilo que sua intuição dita.","Escolhe qualquer caminho ou deixa o acaso decidir, pois no fim das contas o resultado dá na mesma.","Pensa em como essa decisão impacta as pessoas ao meu redor e a sociedade em que vivo.","Observa como essa situação se manifesta na minha mente e sinto a experiência presente antes de agir."],
+       4: ["Companheiros de viagem que compartilham a mesma estranheza e o mesmo tédio de existir.","Aqueles que testam minha autenticidade e me lembram que sou livre para me definir.","Indivíduos únicos que também enfrentam o dilema solitário da própria alma perante o absoluto.","Distrações passageiras ou estruturas sociais vazias que tentam ditar regras irrelevantes.","O espelho da minha própria humanidade; existo para e com os outros em busca de um mundo melhor.","Seres com quem divido o espaço e o tempo, percebidos através da minha vivência e empatia imediata."],
+       5: ["Aceitar o absurdo da vida e viver intensamente, esgotando todas as possibilidades com rebeldia.","Inventar nosso próprio sentido com total autonomia, assumindo a autoria de nossa história.","Buscar um significado transcendental e subjetivo que vá além da lógica fria do mundo.","Aceitar o vazio absoluto e parar de tentar criar propósitos artificiais para nos enganar.","Dedicar nossa existência a construir um sentido coletivo baseado na dignidade e no bem comum.","Focar em descrever e vivenciar o mundo exatamente como ele se apresenta à nossa percepção."],
+       6: ["A minha persistência em continuar vivendo e criando mesmo sabendo do caos do mundo.","A soma das minhas escolhas e atos práticos. Eu sou o que eu faço.","A minha relação íntima e sincera com minhas crenças mais profundas e minhas crises internas.","Nada. A identidade é apenas uma ilusão linguística e social; não somos nada fixo.","A minha postura ética e a maneira como contribuo para a emancipação da humanidade.","A forma como minha consciência habita meu corpo e percebe o tempo, o espaço e as sensações."],
+       7: ["Encaro como parte do jogo, enfrentando-o sem choramingar ou criar falsas esperanças.","Assumo o sofrimento como consequência direta das minhas escolhas ou da própria condição livre.","Enxergo o sofrimento como um momento crucial que purifica a alma e nos aproxima do essencial.","Vejo como um fato biológico inevitável e desprovido de qualquer propósito oculto ou lição.","Tento transformá-lo em empatia para lutar contra as injustices que causam dor ao meu semelhante.","Procuro acolher a dor na minha consciência, observando como ela afeta minha percepção do momento."],
+       8: ["É o fim trágico que torna a vida uma piada, mas que me dá o direito de viver sem amarras.","É o limite final que me lembra que o tempo está correndo e preciso escolher com urgência agora.","O mistério final que desafia a razão e nos força a refletir sobre o valor eterno da nossa alma.","O apagão definitivo que prova que nenhuma ambição, glória ou dor humana importou de verdade.","O encerramento do meu ciclo, deixando meu legado nas memórias e vidas das pessoas que ajudei.","O momento em que minha percepção do mundo cessa; até lá, foco em vivenciar o presente ao máximo."],
+       9: ["Uma busca inútil por respostas onde só há silêncio, então a única verdade é aceitar o caos.","Algo que eu mesmo defino e valido através do meu compromisso com a minha própria coerência.","Algo subjetivo e paradoxal, que só pode ser sentido e vivido na intimidade da alma.","Uma mentira reconfortante que a humanidade inventou para não pirar diante do vazio.","Um valor ético focado na emancipação humana e na justiça social para todos.","A experiência direta de como as coisas se mostram para mim no aqui e no agora."],
+       10: ["A própria luta para chegar ao topo basta para encher o coração de um homem. É preciso imaginar Sísifo feliz.","O homem está condenado a ser livre; porque, uma vez lançado ao mundo, é responsável por tudo quanto fizer.","A angústia é a vertigem da liberdade, que surge quando o espírito quer pôr a síntese e olha para baixo.","Eu vos digo: é preciso ter um caos dentro de si para dar à luz uma estrela cadente.","O homem nada mais é do que aquilo que ele faz de si mesmo. Esse é o primeiro princípio do existencialismo.","Nós somos o nosso corpo; nós estamos no mundo através do nosso corpo, e o mundo é o que nós percebemos."]
     };
 
     async function iniciarQuiz() {
-
         try {
-
             const resposta = await fetch("/quiz/perguntas");
-
-            if (!resposta.ok) {
-                throw new Error("Erro ao buscar perguntas");
-            }
-
+            if (!resposta.ok) throw new Error("Erro ao buscar perguntas");
             listaDeQuestoes = await resposta.json();
-
             quantidadeDeQuestoes = listaDeQuestoes.length;
-
-            if (quantidadeDeQuestoes <= 0) {
-
-                alert("Nenhuma pergunta cadastrada.");
-
-                return;
-            }
-
+            if (quantidadeDeQuestoes <= 0) { alert("Nenhuma pergunta cadastrada."); return; }
             document.getElementById("jogo").style.display = "flex";
-
-           document.getElementById("telaInicial").style.display = "none";
-
+            document.getElementById("telaInicial").style.display = "none";
             document.getElementById("qtdQuestoes").innerHTML = quantidadeDeQuestoes;
-
             preencherHTMLcomQuestaoAtual(0);
-
             btnSubmeter.disabled = false;
-
-
         } catch (erro) {
-
             console.error("Erro ao iniciar quiz:", erro);
-
             alert("Erro ao carregar quiz");
         }
     }
 
     function preencherHTMLcomQuestaoAtual(index) {
-
         habilitarAlternativas(true);
-
         const q = listaDeQuestoes[index];
-
         numeroDaQuestaoAtual = index;
-
         document.getElementById("spanNumeroDaQuestaoAtual").innerHTML = index + 1;
-
-
         document.getElementById("spanQuestaoExibida").innerHTML = q.enunciado;
-
         const alts = alternativasPorQuestao[q.id];
-
         document.getElementById("labelOpcaoUm").innerHTML    = alts[0];
         document.getElementById("labelOpcaoDois").innerHTML  = alts[1];
         document.getElementById("labelOpcaoTres").innerHTML  = alts[2];
@@ -354,151 +268,77 @@
     }
 
     async function submeter() {
-
-    const options = document.getElementsByName("option");
-    const hasChecked = [...options].some(o => o.checked);
-
-    if (!hasChecked) {
-        alert("Escolha uma alternativa.");
-        return;
+        const options = document.getElementsByName("option");
+        const hasChecked = [...options].some(o => o.checked);
+        if (!hasChecked) { alert("Escolha uma alternativa."); return; }
+        btnSubmeter.disabled = true;
+        habilitarAlternativas(false);
+        const alternativaSelecionada = [...options].find(o => o.checked).value.slice(-1);
+        const perguntaAtual = listaDeQuestoes[numeroDaQuestaoAtual];
+        const idUsuario = sessionStorage.ID_USUARIO;
+        try {
+            const resposta = await fetch("/quiz/resposta", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ alternativaEscolhida: alternativaSelecionada, fkUsuario: idUsuario, fkPergunta: perguntaAtual.id })
+            });
+            if (!resposta.ok) { const erro = await resposta.json(); throw new Error(erro.mensagem); }
+        } catch (erro) { console.error("Erro ao cadastrar resposta:", erro); }
+        setTimeout(() => avancar(), 300);
     }
-
-    btnSubmeter.disabled = true;
-    habilitarAlternativas(false);
-
-    const alternativaSelecionada = [...options].find(o => o.checked).value.slice(-1);
-    const perguntaAtual = listaDeQuestoes[numeroDaQuestaoAtual];
-    const idUsuario = sessionStorage.ID_USUARIO;
-
-    try {
-
-        const resposta = await fetch("/quiz/resposta", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({
-                alternativaEscolhida: alternativaSelecionada,
-                fkUsuario: idUsuario,
-                fkPergunta: perguntaAtual.id
-            })
-        });
-
-        if (!resposta.ok) {
-            const erro = await resposta.json();
-            throw new Error(erro.mensagem);
-        }
-
-        console.log("Resposta cadastrada");
-
-    } catch (erro) {
-
-        console.error("Erro ao cadastrar resposta:", erro);
-    
-    }
-
-    // é para avançar mesmo se for duplicado
-    setTimeout(() => avancar(), 300);
-}
 
     function habilitarAlternativas(enable) {
-
-        [
-            'primeiraOpcao',
-            'segundaOpcao',
-            'terceiraOpcao',
-            'quartaOpcao',
-            'quintaOpcao',
-            'sextaOpcao'
-
-        ].forEach(id => {
-
-            document.getElementById(id).disabled = !enable;
-        });
+        ['primeiraOpcao','segundaOpcao','terceiraOpcao','quartaOpcao','quintaOpcao','sextaOpcao']
+            .forEach(id => { document.getElementById(id).disabled = !enable; });
     }
 
-  function avancar() {
-
-    numeroDaQuestaoAtual++;
-
-    desmarcarRadioButtons();
-
-    if (numeroDaQuestaoAtual < quantidadeDeQuestoes) {
-
-        preencherHTMLcomQuestaoAtual(numeroDaQuestaoAtual);
-        btnSubmeter.disabled = false;
-
-    } else {
-
-        finalizarJogo();
+    function avancar() {
+        numeroDaQuestaoAtual++;
+        desmarcarRadioButtons();
+        if (numeroDaQuestaoAtual < quantidadeDeQuestoes) {
+            preencherHTMLcomQuestaoAtual(numeroDaQuestaoAtual);
+            btnSubmeter.disabled = false;
+        } else { finalizarJogo(); }
     }
-}
 
     function desmarcarRadioButtons() {
-
-        document.getElementsByName("option")
-            .forEach(o => o.checked = false);
+        document.getElementsByName("option").forEach(o => o.checked = false);
     }
 
- async function finalizarJogo() {
-
-    document.getElementById("opcoes").style.display = "none";
-
-    document.getElementById("perguntaDaQuestaoAtual").style.display = "none";
-
-    document.getElementById("infoQuestao").style.display = "none";
-
-    btnSubmeter.style.display = "none";
-
-    const divMsg = document.getElementById("msgFinal");
-
-    const idUsuario = sessionStorage.ID_USUARIO;
-
-    try {
-
-        const respostaGerar = await fetch(`/quiz/resultado/${idUsuario}`, {
-            method: "POST"
-        });
-
-        if (!respostaGerar.ok) {
-            throw new Error("Erro ao gerar resultado");
+    async function finalizarJogo() {
+        document.getElementById("opcoes").style.display = "none";
+        document.getElementById("perguntaDaQuestaoAtual").style.display = "none";
+        document.getElementById("infoQuestao").style.display = "none";
+        btnSubmeter.style.display = "none";
+        const divMsg = document.getElementById("msgFinal");
+        const idUsuario = sessionStorage.ID_USUARIO;
+        try {
+            const respostaGerar = await fetch(`/quiz/resultado/${idUsuario}`, { method: "POST" });
+            if (!respostaGerar.ok) throw new Error("Erro ao gerar resultado");
+            const respostaBuscar = await fetch(`/quiz/resultado/${idUsuario}`);
+            if (!respostaBuscar.ok) throw new Error("Erro ao buscar resultado");
+            const resultado = await respostaBuscar.json();
+            divMsg.innerHTML = `<h2>${resultado[0].nome}</h2><p>${resultado[0].descricao}</p>`;
+        } catch (erro) {
+            console.error(erro);
+            divMsg.innerHTML = `<h2>Erro ao gerar resultado</h2>`;
         }
-
-        const respostaBuscar = await fetch(`/quiz/resultado/${idUsuario}`);
-
-        if (!respostaBuscar.ok) {
-            throw new Error("Erro ao buscar resultado");
-        }
-
-        const resultado = await respostaBuscar.json();
-
-        divMsg.innerHTML = `
-            <h2>${resultado[0].nome}</h2>
-            <p>${resultado[0].descricao}</p>
-        `;
-
-    } catch (erro) {
-
-        console.error(erro);
-
-        divMsg.innerHTML = `
-            <h2>Erro ao gerar resultado</h2>
-        `;
+        divMsg.style.display = "block";
+        btnTentarNovamente.style.display = "block";
+        btnTentarNovamente.disabled = false;
     }
 
-    divMsg.style.display = "block";
+    function tentarNovamente() { window.location.reload(); }
 
-    btnTentarNovamente.style.display = "block";
-
-    btnTentarNovamente.disabled = false;
-}
-
-    function tentarNovamente() {
-
-        window.location.reload();
+    function abandonarQuiz() {
+        document.getElementById("jogo").style.display = "none";
+        document.getElementById("telaInicial").style.display = "block";
+        numeroDaQuestaoAtual = 0;
+        desmarcarRadioButtons();
     }
 
     const closeBtn = document.querySelector(".close-btn");
-
-   
-
 </script>
+
+</body>
 </html>

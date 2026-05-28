@@ -6,99 +6,110 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ego | Página Inicial</title>
+    <title>Egó | Editar Aviso</title>
 
-    
     <link rel="stylesheet" href="./../css/dashboards.css">
     <link rel="stylesheet" href="./../css/estilo.css" />
     <script src="../js/sessao.js"></script>
 
-    <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link
-        href="https://fonts.googleapis.com/css2?family=Exo+2:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
-        rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Exo+2:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 </head>
 
-<body onload="validarSessao(), listarInfosDeUm()" style="background-color: #161618;">
-    <!-- <body onload="validarSessao()"> -->
+<body onload="validarSessao(), listarInfosDeUm()">
 
     <div class="janela">
 
+        <!-- ── SIDEBAR ── -->
+        <aside class="header-left">
 
-        <div class="header-left">
-
-            <h1>AquaTech</h1>
+            <a href="../index.html" class="card-logo">
+                <img src="../assets/imgs/logo-branca.png" alt="Egó">
+            </a>
 
             <div class="hello">
                 <h3>Olá, <span id="b_usuario">usuário</span>!</h3>
             </div>
 
-            <div class="btn-nav-white">
-                <a href="cards.html">
-                    <h3>Aquários</h3>
-                </a>
-            </div>
+            <nav class="sidebar-nav">
 
-            <div class="btn-nav-white">
-                <a href="./dashboard.html">
-                    <h3>Gráficos</h3>
-                </a>
-            </div>
+                <div class="btn-nav-white">
+                    <a href="./cards.html">
+                        <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M9 5H7a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-2M9 5a2 2 0 0 0 2 2h2a2 2 0 0 0 2-2"/></svg>
+                        <h3>Quizzes</h3>
+                    </a>
+                </div>
 
-            <div class="btn-nav-white">
-                <a href="./mural.html">
-                    <h3>Mural de Avisos</h3>
-                </a>
-            </div>
+                <div class="btn-nav-white">
+                    <a href="./dashboard.html">
+                        <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="9" rx="1"/><rect x="14" y="3" width="7" height="5" rx="1"/><rect x="14" y="12" width="7" height="9" rx="1"/><rect x="3" y="16" width="7" height="5" rx="1"/></svg>
+                        <h3>Gráficos</h3>
+                    </a>
+                </div>
+
+                <div class="btn-nav-white">
+                    <a href="./mural.html">
+                        <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M15 17h5l-1.405-1.405A2.032 2.032 0 0 1 18 14.158V11a6.002 6.002 0 0 0-4-5.659V5a2 2 0 1 0-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 1 1-6 0v-1m6 0H9"/></svg>
+                        <h3>Mural de Avisos</h3>
+                    </a>
+                </div>
+
+            </nav>
 
             <div class="btn-logout" onclick="limparSessao()">
                 <h3>Sair</h3>
             </div>
 
-        </div>
+        </aside>
 
-        <div class="dash-right">
+        <!-- ── CONTEÚDO ── -->
+        <main class="dash">
+
+            <div class="dash-page-header">
+                <div>
+                    <h2>Editar Aviso</h2>
+                    <p class="dash-breadcrumb">Dashboard &rsaquo; <span>Editar Aviso</span></p>
+                </div>
+            </div>
 
             <div class="avisos">
                 <div class="container">
                     <h1>Editar um aviso</h1>
                     <div class="div-form">
                         <label>
-                            ID:
-                            <br>
-                            <input id="input_id" maxlength="100" type="text" style="color: rgb(196, 196, 196)" disabled>
+                            ID:<br>
+                            <input id="input_id" maxlength="100" type="text" disabled>
                         </label>
                         <label>
-                            Autor:
-                            <br>
-                            <input id="input_nome" maxlength="100" type="text" style="color: rgb(196, 196, 196)"
-                                disabled>
+                            Autor:<br>
+                            <input id="input_nome" maxlength="100" type="text" disabled>
                         </label>
                         <label>
-                            Título:
-                            <br>
-                            <input id="input_titulo" maxlength="100" type="text" style="color: rgb(196, 196, 196)"
-                                disabled>
+                            Título:<br>
+                            <input id="input_titulo" maxlength="100" type="text" disabled>
                         </label>
                         <br>
                         <label>
-                            Descrição (máximo de 250 caracteres):
-                            <br>
+                            Descrição (máximo de 250 caracteres):<br>
                             <textarea id="textarea_descricao" maxlength="250" rows="5"></textarea>
                         </label>
                         <br>
                         <button onclick="editar()">Editar</button>
                     </div>
-
                 </div>
             </div>
-        </div>
+
+        </main>
+
     </div>
+
 </body>
 
-</html>
-
 <script>
+
+    b_usuario.innerHTML = sessionStorage.NOME_USUARIO;
+
     function listarInfosDeUm() {
         console.log("Criar função de trazer informações de post escolhido");
     }
@@ -106,25 +117,22 @@
     function editar() {
         fetch(`/avisos/editar/${sessionStorage.getItem("ID_POSTAGEM_EDITANDO")}`, {
             method: "PUT",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify({
-                descricao: textarea_descricao.value
-            })
-        }).then(function (resposta) {
-
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ descricao: textarea_descricao.value })
+        }).then(function(resposta) {
             if (resposta.ok) {
                 window.alert("Post atualizado com sucesso pelo usuario de email: " + sessionStorage.getItem("EMAIL_USUARIO") + "!");
-                window.location = "/dashboard/mural.html"
+                window.location = "/dashboard/mural.html";
             } else if (resposta.status == 404) {
                 window.alert("Deu 404!");
             } else {
                 throw ("Houve um erro ao tentar realizar a postagem! Código da resposta: " + resposta.status);
             }
-        }).catch(function (resposta) {
+        }).catch(function(resposta) {
             console.log(`#ERRO: ${resposta}`);
         });
     }
 
 </script>
+
+</html>
