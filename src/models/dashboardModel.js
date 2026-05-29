@@ -16,6 +16,25 @@ function listarPerfis() {
     return database.executar(instrucaoSql);
 }
 
+function obterDadosPerfilUsuario(idUsuario) {
+    var instrucaoSql = `
+    SELECT 
+        alternativa_escolhida, 
+        COUNT(*) AS total
+    FROM 
+        resposta
+    WHERE 
+        fkUsuario = ${idUsuario}
+    GROUP BY 
+        alternativa_escolhida
+    ORDER BY 
+        total DESC;
+    `;
+
+    return database.executar(instrucaoSql);
+}
+
 module.exports = {
-    listarPerfis
+    listarPerfis,
+    obterDadosPerfilUsuario
 }
