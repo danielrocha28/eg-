@@ -1,6 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Exo+2:wght@300;400;500;600;700&display=swap');
 
-/* ── VARIÁVEIS ───────────────────────────────── */
+/* ── VARIÁVEIS  */
 :root {
   --pink:        #e6005a;
   --pink-light:  #fce7ef;
@@ -17,7 +17,6 @@
   --sidebar-w:   240px;
 }
 
-/* ── RESET BÁSICO ────────────────────────────── */
 * {
   margin: 0;
   padding: 0;
@@ -36,7 +35,7 @@ a {
   color: inherit;
 }
 
-/* ── LAYOUT PRINCIPAL ────────────────────────── */
+/* ── LAYOUT PRINCIPAL */
 .janela {
   display: flex;
   min-height: 100vh;
@@ -54,7 +53,7 @@ a {
   overflow-x: hidden;
 }
 
-/* ── SIDEBAR ─────────────────────────────────── */
+/* ── barra do grafico */
 .header-left {
   position: fixed;
   top: 0;
@@ -183,7 +182,7 @@ a {
   color: #fff;
 }
 
-/* ── CABEÇALHO DA PÁGINA ─────────────────────── */
+/* ── CABEÇALHO DA PÁGINA */
 .dash-page-header {
   width: 100%;
   max-width: 960px;
@@ -211,7 +210,7 @@ a {
   font-weight: 500;
 }
 
-/* ── CARDS DE STATS ──────────────────────────── */
+/* ── CARDS DE STATS */
 .stats-row {
   width: 100%;
   max-width: 960px;
@@ -266,7 +265,7 @@ a {
   color: var(--text);
 }
 
-/* ── QUIZ WRAPPER ────────────────────────────── */
+/* ── QUIZ WRAPPER */
 .quiz {
   width: 100%;
   max-width: 960px;
@@ -276,7 +275,7 @@ a {
   gap: 24px;
 }
 
-/* ── TELA INICIAL ────────────────────────────── */
+/* ── TELA INICIAL*/
 .quiz-intro-card {
   background: var(--dark);
   border-radius: 16px;
@@ -410,7 +409,6 @@ a {
   background: #c40050;
 }
 
-/* ── JOGO: LAYOUT 3 COLUNAS ──────────────────── */
 #jogo {
   position: relative;
   width: 100%;
@@ -428,7 +426,6 @@ a {
   flex-direction: column;
 }
 
-/* Linha de info (questão X de Y) — ocupa a coluna 1 */
 #infoQuestao {
   grid-column: 1;
   grid-row: 1;
@@ -579,7 +576,6 @@ a {
   color: #fff;
 }
 
-/* Voltar — posicionado absolutamente no topo direito do card */
 .voltar-quiz {
   position: absolute;
   top: 20px;
@@ -611,7 +607,7 @@ a {
   width: 14px;
 }
 
-/* ── RESULTADO FINAL ─────────────────────────── */
+/* ── RESULTADO FINAL */
 #msgFinal {
   background: var(--pink-light);
   border: 1.5px solid var(--pink);
@@ -633,7 +629,7 @@ a {
   line-height: 1.7;
 }
 
-/* ── MODAL ───────────────────────────────────── */
+/* ── MODAL */
 .modal {
   display: none;
   position: fixed;
@@ -700,13 +696,186 @@ a {
   line-height: 1.7;
 }
 
-/* ── GRÁFICO ─────────────────────────────────── */
+/* ── GRÁFICO */
 .grafico-container {
-  width: 105%;
+  width: 100%;
   max-width: 900px;
   background: var(--card-bg);
   border: 1px solid var(--border);
   border-radius: 16px;
   padding: 20px;
-  box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+  box-shadow: 0 6px 20px rgba(2,6,23,0.06);
+  margin: 12px 0;
+  overflow: hidden;
+}
+
+#graficos {
+  width: 100%;
+  max-width: 960px;
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  align-items: center;
+}
+
+#graficos h3 {
+  margin: 0 0 12px 0;
+  color: var(--text);
+  font-size: 18px;
+  font-weight: 700;
+  font-family: 'Exo 2', sans-serif;
+}
+
+#graficos .grafico-container {
+  width: 100%;
+  padding: 18px;
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(2,6,23,0.04);
+}
+
+#graficos canvas {
+  border-radius: 8px;
+  display: block;
+  width: 100% !important;
+  height: auto !important;
+}
+
+/* ── MURAL DE AVISOS  */
+.avisos .container {
+  width: 100%;
+  max-width: 960px;
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 24px;
+  box-shadow: 0 6px 20px rgba(2,6,23,0.06);
+}
+
+.avisos h1 {
+  font-size: 20px;
+  margin-bottom: 12px;
+  color: var(--text);
+}
+
+.div-form {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 18px;
+}
+
+.div-form form {
+  width: 100%;
+  max-width: 720px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.div-form label {
+  font-size: 14px;
+  color: var(--text);
+}
+
+.div-form input[type="text"],
+.div-form textarea {
+  width: 100%;
+  padding: 12px 14px;
+  border-radius: 10px;
+  border: 1.5px solid var(--border);
+  background: transparent;
+  font-size: 14px;
+  color: var(--text);
+  resize: vertical;
+}
+
+.div-form button {
+  align-self: flex-start;
+  padding: 10px 16px;
+  background: var(--pink);
+  color: #fff;
+  border: none;
+  border-radius: 10px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+
+.div-form button:hover {
+  background: #c40050;
+}
+
+.div-results {
+  margin-top: 8px;
+}
+
+.feed-container {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.publicacao {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 14px;
+  border-radius: 10px;
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  box-shadow: 0 2px 8px rgba(15,15,15,0.03);
+}
+
+.publicacao > span,
+.publicacao > div {
+  max-width: 70%;
+}
+
+.publicacao-nome {
+  font-size: 13px;
+  color: var(--text-muted);
+}
+
+.publicacao-titulo {
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--text);
+}
+
+.publicacao-descricao {
+  font-size: 14px;
+  color: var(--text);
+  margin-top: 6px;
+}
+
+.div-buttons {
+  margin-left: auto;
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.publicacao-btn-editar {
+  padding: 8px 12px;
+  border-radius: 8px;
+  background: transparent;
+  border: 1.5px solid var(--pink);
+  color: var(--pink);
+  cursor: pointer;
+  font-weight: 700;
+}
+
+.publicacao-btn-editar:hover {
+  background: var(--pink);
+  color: #fff;
+}
+
+button btnDeletar {
+  border-color: #f87171;
+  color: #ef4444;
+}
+
+button btnDeletar:hover {
+  background: #ef4444;
+  color: #fff;
 }
