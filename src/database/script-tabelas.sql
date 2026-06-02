@@ -1,29 +1,41 @@
--- Arquivo de apoio, caso você queira criar tabelas como as aqui criadas para a API funcionar.
--- Você precisa executar os comandos no banco de dados para criar as tabelas,
--- ter este arquivo aqui não significa que a tabela em seu BD estará como abaixo!
-
-/*
-comandos para mysql server
-*/
-
-CREATE DATABASE aquatech;
-
-USE aquatech;
-
-CREATE TABLE empresa (
-	id INT PRIMARY KEY AUTO_INCREMENT,
-	razao_social VARCHAR(50),
-	cnpj CHAR(14),
-	codigo_ativacao VARCHAR(50)
-);
+CREATE DATABASE ego;
+USE ego;
 
 CREATE TABLE usuario (
-	id INT PRIMARY KEY AUTO_INCREMENT,
-	nome VARCHAR(50),
-	email VARCHAR(50),
-	senha VARCHAR(50),
-	fk_empresa INT,
-	FOREIGN KEY (fk_empresa) REFERENCES empresa(id)
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    nome VARCHAR(50),
+    email VARCHAR(50),
+    senha VARCHAR(50)
+);
+
+CREATE TABLE pergunta (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    enunciado VARCHAR(456)
+);
+
+CREATE TABLE resposta (
+    fkUsuario INT,
+    fkPergunta INT,
+    alternativa_escolhida CHAR(1),
+    PRIMARY KEY (fkUsuario, fkPergunta),
+    FOREIGN KEY (fkUsuario) REFERENCES usuario(id),
+    FOREIGN KEY (fkPergunta) REFERENCES pergunta(id)
+);
+
+
+CREATE TABLE perfil (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    nome VARCHAR(50),
+    descricao TEXT
+);
+
+CREATE TABLE resultado (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    fkUsuario INT UNIQUE,
+    fkPerfil INT, -- Chave estrangeira ligando ao perfil
+    gerado_em DATETIME DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (fkUsuario) REFERENCES usuario(id),
+    FOREIGN KEY (fkPerfil) REFERENCES perfil(id)
 );
 
 CREATE TABLE aviso (
@@ -34,29 +46,69 @@ CREATE TABLE aviso (
 	FOREIGN KEY (fk_usuario) REFERENCES usuario(id)
 );
 
-create table aquario (
-/* em nossa regra de negócio, um aquario tem apenas um sensor */
-	id INT PRIMARY KEY AUTO_INCREMENT,
-	descricao VARCHAR(300),
-	fk_empresa INT,
-	FOREIGN KEY (fk_empresa) REFERENCES empresa(id)
-);
+DROP DATABASE ego;
 
-/* esta tabela deve estar de acordo com o que está em INSERT de sua API do arduino - dat-acqu-ino */
+INSERT INTO pergunta (enunciado) VALUES 
+('Como você encara a rotina diária e as tarefas repetitivas da vida?'),
+('Se você pudesse resumir o maior desafio de estar vivo, qual seria?'),
+('Diante de um erro ou fracasso marcante do passado, qual é a sua postura?'),
+('O que a palavra "Angústia" evoca no seu cotidiano?'),
+('Como você enxerga as leis morais e os valores da sociedade?'),
+('Se o universo e o divino silenciarem perante suas maiores dúvidas, o que você faz?'),
+('Qual é a sua relação com o seu próprio corpo?'),
+('Para você, o que significa viver de forma "autêntica"?'),
+('Como você enxerga o desfecho final da jornada humana: a morte?'),
+('Se você tivesse que escolher o lema do seu livro de cabeceira, qual seria?');
 
-create table medida (
-	id INT PRIMARY KEY AUTO_INCREMENT,
-	dht11_umidade DECIMAL,
-	dht11_temperatura DECIMAL,
-	luminosidade DECIMAL,
-	lm35_temperatura DECIMAL,
-	chave TINYINT,
-	momento DATETIME,
-	fk_aquario INT,
-	FOREIGN KEY (fk_aquario) REFERENCES aquario(id)
-);
+SELECT * FROM pergunta;
 
-insert into empresa (razao_social, codigo_ativacao) values ('Empresa 1', 'ED145B');
-insert into empresa (razao_social, codigo_ativacao) values ('Empresa 2', 'A1B2C3');
-insert into aquario (descricao, fk_empresa) values ('Aquário de Estrela-do-mar', 1);
-insert into aquario (descricao, fk_empresa) values ('Aquário de Peixe-dourado', 2);
+SELECT * FROM usuario;
+SELECT * FROM resultado;
+
+TRUNCATE TABLE pergunta;
+
+DROP TABLE resposta;
+
+SELECT alternativa_escolhida, COUNT(*) AS total
+FROM resposta
+WHERE fkUsuario = 1
+GROUP BY alternativa_escolhida
+ORDER BY total DESC;
+
+INSERT INTO perfil (nome, descricao) VALUES
+('Filosofia do Absurdo', 'A vida não possui sentido objetivo, mas mesmo assim continuamos vivendo e criando significado diante do absurdo.'),
+
+('Liberdade Radical', 'O ser humano é totalmente livre e responsável por suas escolhas e consequências.'),
+
+('Fé e Angústia', 'A existência envolve angústia, incerteza e um salto de fé diante do desconhecido.'),
+
+('Niilismo', 'Não existem significados absolutos, valores universais ou propósito intrínseco na existência.'),
+
+('Existencialismo Humanista', 'O ser humano constrói sua essência através das escolhas, relações e responsabilidade ética.'),
+
+('Existencialismo Fenomenológico', 'A experiência subjetiva e a percepção individual moldam a compreensão da realidade.');
+
+  SELECT 
+            p.nome,
+            COUNT(*) AS total
+        FROM resultado r
+        JOIN perfil p
+            ON r.fkPerfil = p.id
+        GROUP BY p.nome
+        ORDER BY total DESC;
+
+CREATE VIEW vwPerfil AS   
+	SELECT 
+            p.nome,
+            COUNT(*) AS total
+        FROM resultado r
+        JOIN perfil p
+            ON r.fkPerfil = p.id
+        GROUP BY p.nome
+        ORDER BY total DESC;
+        
+        SELECT * FROM vwPerfil;
+        
+SELECT * FROM usuario;
+
+ALTER TABLE aviso MODIFY COLUMN descricao VARCHAR(500);
