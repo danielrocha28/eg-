@@ -7,7 +7,6 @@ router.get("", (req, res) => {
   res.render("index")
 });
 
-// upload.single('foto') vai buscar no json alguma propriedade chamada foto 
 router.post('/cadastro', upload.single('foto'), (req, res) => {
   usuarioController.salvar(req, res);
 });

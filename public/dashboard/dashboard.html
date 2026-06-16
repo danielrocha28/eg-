@@ -24,7 +24,7 @@
 
     <div class="janela">
 
-        <!-- ── SIDEBAR ── -->
+        
         <aside class="header-left">
 
             <a href="../index.html" class="card-logo">
@@ -77,7 +77,7 @@
 
         </aside>
 
-        <!-- ── CONTEÚDO ── -->
+        
         <main class="dash">
 
             <div class="dash-page-header">
@@ -100,7 +100,6 @@
 <script>
     window.onload = function () {
         b_usuario.innerHTML = sessionStorage.NOME_USUARIO;
-        // Chama a função para montar a estrutura HTML dos gráficos
         carregarGrafico();
     }
 
@@ -109,7 +108,7 @@
         document.getElementById("graficos").innerHTML = `
             <div style="display: flex; flex-direction: column; gap: 40px; align-items: center; width: 100%;">
                 
-                <!-- Gráfico Radar Original -->
+                
                 <div id="graficoPerfis" style="width:100%; max-width:700px; display:flex; flex-direction:column; align-items:center;">
                     <h3 style="color:#1a1a1a; margin-bottom:20px; font-family:'Exo 2',sans-serif; font-size:18px; font-weight:600;">
                         Distribuição Geral dos Perfis
@@ -119,7 +118,7 @@
                     </div>
                 </div>
 
-                <!-- Novo Gráfico de Rosca (Perfil do Usuário) -->
+                
                 <div id="graficoRespostas" style="width:100%; max-width:700px; display:flex; flex-direction:column; align-items:center;">
                     <h3 style="color:#1a1a1a; margin-bottom:20px; font-family:'Exo 2',sans-serif; font-size:18px; font-weight:600;">
                         Composição do Seu Perfil
@@ -132,12 +131,9 @@
             </div>
         `;
         
-        // Dispara as requisições para os dois gráficos
         obterDadosGrafico(); 
         obterDadosPerfilUsuario(); 
     }
-
-    // ── 2. LÓGICA DO GRÁFICO RADAR (GERAL) ──
     function obterDadosGrafico() {
         fetch("/dashboard/perfis", { cache: "no-store" })
             .then(function (response) {

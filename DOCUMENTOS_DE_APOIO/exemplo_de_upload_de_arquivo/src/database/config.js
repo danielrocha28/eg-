@@ -1,6 +1,5 @@
 const mysql = require("mysql2");
 
-// CONEXÃO DO MYSQL WORKBENCH (LOCAL)
 const mySqlConfig = {
   host: "SEU_SERVIDOR",
   database: "SEU_BANCO_DE_DADOS",

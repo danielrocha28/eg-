@@ -27,7 +27,6 @@ async function postarPergunta(req, res) {
     }
 }
 
-// POST /resposta
 function cadastrarResposta(req, res) {
     var alternativaEscolhida = req.body.alternativaEscolhida;
     var idUsuario = req.body.fkUsuario;
@@ -119,84 +118,7 @@ function buscarResultado(req, res) {
 
 
 
-// // POST /quiz
-// function cadastrarQuiz(req, res) {
-//     var titulo = req.body.titulo;
-//     var descricao = req.body.descricao; 
-//     var idUsuario = req.body.idUsuario;
 
-//     // Validação básica
-//     if (!titulo || !descricao || !idUsuario) {
-//         return res.status(400).json({
-//             mensagem: "Campos obrigatórios: titulo, descricao, idUsuario"
-//         });
-//     }
-
-//     quizModel.cadastrarQuiz(titulo, descricao, idUsuario)
-//         .then(function(resultado) {
-//             res.status(201).json({
-//                 mensagem: "Quiz cadastrado com sucesso!",
-//                 id: resultado.insertId
-//             });
-//         })
-//         .catch(function(erro) {
-//             console.error("Erro ao cadastrar quiz:", erro);
-//             res.status(500).json({ mensagem: "Erro interno no servidor" });
-//         });
-// }
-
-// // GET /quiz/:idUsuario
-// function listarQuizzes(req, res) {
-//     var idUsuario = req.params.idUsuario;
-
-//     quizModel.listarQuizzesPorUsuario(idUsuario)
-//         .then(function(quizzes) {
-//             if (quizzes.length === 0) {
-//                 return res.status(404).json({ mensagem: "Nenhum quiz encontrado" });
-//             }
-//             res.status(200).json(quizzes);
-//         })
-//         .catch(function(erro) {
-//             console.error("Erro ao listar quizzes:", erro);
-//             res.status(500).json({ mensagem: "Erro interno no servidor" });
-//         });
-// }
-
-// // GET /quiz/:idQuiz/perguntas
-// function listarPerguntas(req, res) {
-//     var idQuiz = req.params.idQuiz;
-
-//     quizModel.listarPerguntasPorQuiz(idQuiz)
-//         .then(function(perguntas) {
-//             if (perguntas.length === 0) {
-//                 return res.status(404).json({ mensagem: "Nenhuma pergunta encontrada" });
-//             }
-//             res.status(200).json(perguntas);
-//         })
-//         .catch(function(erro) {
-//             console.error("Erro ao listar perguntas:", erro);
-//             res.status(500).json({ mensagem: "Erro interno no servidor" });
-//         });
-// }
-
-
-// // GET /resultado/:idUsuario/:idQuiz
-// function resultadoDoQuiz(req, res) {
-//     var idUsuario = req.params.idUsuario;
-//     var idQuiz = req.params.idQuiz;
-
-//     quizModel.buscarResultado(idUsuario, idQuiz)
-//         .then(function(resultado) {
-//             if (resultado.length === 0) {
-//                 return res.status(404).json({ mensagem: "Resultado não encontrado" });
-//             }
-//             res.status(200).json(resultado[0]);
-//         })
-//         .catch(function(erro) {
-//             console.error("Erro ao buscar resultado:", erro);
-//             res.status(500).json({ mensagem: "Erro interno no servidor" });
-//         });
-// }
 
 module.exports = {
     postarPergunta,
